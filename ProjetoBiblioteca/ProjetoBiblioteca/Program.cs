@@ -60,9 +60,9 @@ app.MapPost("/api/Livros/cadastrar", ([FromBody] Livros livros, [FromServices] A
     }
 
     //Regra de Negócio - Não permitir produtos com o mesmo nome
-    Livros? livrosBuscado = ctx.Livros.FirstOrDefault(x => x.Nome == livros.Titulo);
+    Livros? livrosBuscado = ctx.Livros.FirstOrDefault(x => x.Titulo == livros.Titulo);
 
-    if(produtoBuscado is not null)
+    if(livrosBuscado is not null)
     {
         return Results.BadRequest("Já existe um livro com o mesmo nome");
     }
@@ -96,26 +96,26 @@ app.MapDelete("/api/Livros/deletar/{id}", ([FromRoute] string id, [FromServices]
 
 //Alterar
 //PUT: http://localhost:5134/api/Livros/alterar/
-app.MapPut("/api/Livros/alterar/{id}", ([FromRoute] string id,[FromBody] Livros livrosAlterado,
-[FromServices] AppDataContext ctx) => 
-{
-    Livros? livros = ctx.Livros.Find(id);
-    Autor? autor = ctx.Livros.Find(nome);
+// app.MapPut("/api/Livros/alterar/{id}", ([FromRoute] string id,[FromBody] Livros livrosAlterado,
+// [FromServices] AppDataContext ctx) => 
+// {
+//     Livros? livros = ctx.Livros.Find(id);
+//     Autor? autor = ctx.Livros.Find(nome);
 
-    if(livros is null)
-    {
-        return Results.NotFound("Livro não encontrado!"); 
-    }
+//     if(livros is null)
+//     {
+//         return Results.NotFound("Livro não encontrado!"); 
+//     }
     
-    livros.Id = livrosAlterado.Id;
-    livros.Titulo = livrosAlterado.Titulo;
-    livros.AnoPublicacao = livrosAlterado.AnoPublicacao;
+//     livros.Id = livrosAlterado.Id;
+//     livros.Titulo = livrosAlterado.Titulo;
+//     livros.AnoPublicacao = livrosAlterado.AnoPublicacao;
 
-    ctx.Produtos.Update(produto);
-    ctx.SaveChanges();
+//     ctx.Produtos.Update(produto);
+//     ctx.SaveChanges();
 
-    return Results.Ok("Produto alterado com sucesso!");
+//     return Results.Ok("Produto alterado com sucesso!");
 
-});
+// });
 
 app.Run();
