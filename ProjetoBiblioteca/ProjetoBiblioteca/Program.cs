@@ -19,7 +19,7 @@ var app = builder.Build();
 
 //Listar
 //GET: http://localhost:****/api/Livros/listar
-app.MapGet("/api/Livros/listar", ([FromServices] AppDataContext ctx) =>
+app.MapGet("/api/livros/listar", ([FromServices] AppDataContext ctx) =>
 {
 
     if (ctx.Livros.Any())
@@ -33,7 +33,7 @@ app.MapGet("/api/Livros/listar", ([FromServices] AppDataContext ctx) =>
 
 //Buscar
 //GET: http://localhost:****/api/Livros/buscar/
-app.MapGet("/api/Livros/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) =>
+app.MapGet("/api/livros/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) =>
 {
     //Expressão lambda em C#
     Livros? livros = ctx.Livros.FirstOrDefault(x => x.Id == id);
@@ -49,7 +49,7 @@ app.MapGet("/api/Livros/buscar/{id}", ([FromRoute] int id, [FromServices] AppDat
 
 //Cadastrar
 //POST: http://localhost:****/api/Livros/cadastrar/
-app.MapPost("/api/Livros/cadastrar", ([FromBody] Livros livros, [FromServices] AppDataContext ctx) =>
+app.MapPost("/api/livros/cadastrar", ([FromBody] Livros livros, [FromServices] AppDataContext ctx) =>
 {
     //Valdação dos atributos do produto
     List<ValidationResult> erros = new List<ValidationResult>();
@@ -75,8 +75,35 @@ app.MapPost("/api/Livros/cadastrar", ([FromBody] Livros livros, [FromServices] A
 
 });
 
+//POST: http://localhost:****/api/Usuario/cadastrar/
+app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromServices] AppDataContext ctx) =>
+{
+    //Valdação dos atributos do produto
+    List<ValidationResult> erros = new List<ValidationResult>();
+
+    if(!Validator.TryValidateObject(usuarios, new ValidationContext(usuarios), erros, true))
+    {
+        return Results.BadRequest(erros);
+    }
+
+    //Regra de Negócio - Não permitir produtos com o mesmo nome
+    Usuario? usuarioBuscado = ctx.Usuarios.FirstOrDefault(x => x.Nome == usuarios.Nome);
+
+    if(usuarioBuscado is not null)
+    {
+        return Results.BadRequest("Já existe um livro com o mesmo nome");
+    }
+
+    //Adicionar o produto dentro do banco de dados
+    ctx.Usuarios.Add(usuarios);
+    ctx.SaveChanges();
+
+    return Results.Created("", usuarios);
+
+});
+
 //DELETE: http://localhost:****/api/Livros/deletar/
-app.MapDelete("/api/Livros/deletar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) => 
+app.MapDelete("/api/livros/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
     Livros? livros = ctx.Livros.Find(id);
 
@@ -96,7 +123,7 @@ app.MapDelete("/api/Livros/deletar/{id}", ([FromRoute] string id, [FromServices]
 
 //Alterar
 //PUT: http://localhost:5134/api/Livros/alterar/
-// app.MapPut("/api/Livros/alterar/{id}", ([FromRoute] string id,[FromBody] Livros livrosAlterado,
+// app.MapPut("/api/livros/alterar/{id}", ([FromRoute] string id,[FromBody] Livros livrosAlterado,
 // [FromServices] AppDataContext ctx) => 
 // {
 //     Livros? livros = ctx.Livros.Find(id);
