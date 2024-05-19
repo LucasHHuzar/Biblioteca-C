@@ -1,0 +1,47 @@
+@base_url = https://localhost:PORTA/api
+
+# LIVRO ######################################
+
+### Criação de um novo livro
+POST {{base_url}}/livro/cadastrar
+Content-Type: application/json
+
+{
+    "Id": "int",
+    "Titulo" : " nome",
+    "Autor" : "nome",
+    "AnoPublicacao" : "int",
+    "Genero" : "genero",
+    "ExemplaresDisponiveis" : "int",
+
+}
+
+### Obtenção de todos os livros
+GET {{base_url}}/livros/listar
+
+# USUARIOS ############################################
+
+### Criação de um novo usuario
+POST {{base_url}}/usuario/cadastrar
+Content-Type: application/json
+
+{
+    "Id": "int",
+    "Nome" : " nome",
+    "Telefone" : "string"
+}
+
+# EMPRESTIMO     #####################################
+
+### Criação de um novo emprestimo
+POST {{base_url}}/emprestimo/cadastrar
+Content-Type: application/json
+
+{
+    "Id": "int",
+    "LivroId" : " int",
+    "UsuarioId" : "int",
+}
+
+### Obtenção de todos os livros
+GET {{base_url}}/livros/listar
