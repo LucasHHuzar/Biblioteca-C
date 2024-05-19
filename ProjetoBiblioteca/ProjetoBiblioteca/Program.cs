@@ -33,7 +33,7 @@ app.MapGet("/api/livros/listar", ([FromServices] AppDataContext ctx) =>
 
 //Buscar
 //GET: http://localhost:****/api/Livros/buscar/
-app.MapGet("/api/livros/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) =>
+app.MapGet("/api/livros/buscar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) =>
 {
     //Expressão lambda em C#
     Livros? livros = ctx.Livros.FirstOrDefault(x => x.Id == id);
