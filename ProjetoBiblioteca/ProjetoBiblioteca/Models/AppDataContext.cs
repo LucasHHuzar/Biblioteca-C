@@ -14,16 +14,4 @@ public class AppDataContext : DbContext
         optionsBuilder.UseSqlite("Data Source=banco_biblioteca.db");
     }
 
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     modelBuilder.Entity<Emprestimo>()
-    //         .HasOne(e => e.Livro)
-    //         .WithMany()
-    //         .HasForeignKey(e => e.LivroId);
-
-    //     modelBuilder.Entity<Emprestimo>()
-    //         .HasOne(e => e.Usuario)
-    //         .WithMany()
-    //         .HasForeignKey(e => e.UsuarioId);
-    // }
 }

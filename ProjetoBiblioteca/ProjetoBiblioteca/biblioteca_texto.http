@@ -1,9 +1,9 @@
-@base_url = https://localhost:PORTA/api
+@base_url = https://localhost:5077/api
 
 # LIVRO ######################################
 
 ### Criação de um novo livro
-POST {{base_url}}/livro/cadastrar
+POST {{base_url}}/livros/cadastrar
 Content-Type: application/json
 
 {
@@ -12,8 +12,7 @@ Content-Type: application/json
     "Autor" : "nome",
     "AnoPublicacao" : "int",
     "Genero" : "genero",
-    "ExemplaresDisponiveis" : "int",
-
+    "ExemplaresDisponiveis" : "int"
 }
 
 ### Obtenção de todos os livros
@@ -40,7 +39,7 @@ Content-Type: application/json
 {
     "Id": "int",
     "LivroId" : " int",
-    "UsuarioId" : "int",
+    "UsuarioId" : "int"
 }
 
 ### Obtenção de todos os livros

@@ -21,10 +21,7 @@ public class Livros
         ExemplaresDisponiveis = exemplaresDisponiveis;
         Id = Guid.NewGuid().ToString();
         CriadoEm = DateTime.Now;
-
     }
-
-
 
     public string? Id { get; set; }
     public string? Titulo { get; set; }
@@ -32,7 +29,6 @@ public class Livros
     public int AnoPublicacao { get; set; }
     public string? Genero { get; set; }
     public int ExemplaresDisponiveis { get; set; }
-   
     public DateTime CriadoEm { get; set; }
 
 }
