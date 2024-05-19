@@ -48,18 +48,24 @@ namespace ProjetoBiblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LivroId = table.Column<int>(type: "INTEGER", nullable: false),
-                    livroId = table.Column<string>(type: "TEXT", nullable: true),
+                    LivroId = table.Column<string>(type: "TEXT", nullable: false),
                     UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
                     DataEmprestimo = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DataDevolucao = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    DataDevolucao = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LivrosId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Emprestimos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Emprestimos_Livros_livroId",
-                        column: x => x.livroId,
+                        name: "FK_Emprestimos_Livros_LivroId",
+                        column: x => x.LivroId,
+                        principalTable: "Livros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Emprestimos_Livros_LivrosId",
+                        column: x => x.LivrosId,
                         principalTable: "Livros",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -71,9 +77,14 @@ namespace ProjetoBiblioteca.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Emprestimos_livroId",
+                name: "IX_Emprestimos_LivroId",
                 table: "Emprestimos",
-                column: "livroId");
+                column: "LivroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Emprestimos_LivrosId",
+                table: "Emprestimos",
+                column: "LivrosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Emprestimos_UsuarioId",

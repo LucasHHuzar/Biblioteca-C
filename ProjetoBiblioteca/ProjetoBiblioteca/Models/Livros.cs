@@ -31,4 +31,6 @@ public class Livros
     public int ExemplaresDisponiveis { get; set; }
     public DateTime CriadoEm { get; set; }
 
+     public ICollection<Emprestimo> Emprestimos { get; set; }
+
 }
