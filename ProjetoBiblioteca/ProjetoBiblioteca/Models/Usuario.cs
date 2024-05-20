@@ -18,4 +18,5 @@ public class Usuario
     public string? Id { get; set; }
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
+     public ICollection<Emprestimo> Emprestimos { get; set; }
 }

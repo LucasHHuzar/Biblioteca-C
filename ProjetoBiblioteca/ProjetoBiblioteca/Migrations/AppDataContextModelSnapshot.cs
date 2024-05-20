@@ -29,20 +29,23 @@ namespace ProjetoBiblioteca.Migrations
                     b.Property<DateTime>("DataEmprestimo")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LivroId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("LivroId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LivrosId")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("livroId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("LivroId");
 
-                    b.HasIndex("livroId");
+                    b.HasIndex("LivrosId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Emprestimos");
                 });
@@ -94,19 +97,35 @@ namespace ProjetoBiblioteca.Migrations
 
             modelBuilder.Entity("ProjetoBiblioteca.Models.Emprestimo", b =>
                 {
-                    b.HasOne("ProjetoBiblioteca.Models.Usuario", "usuario")
+                    b.HasOne("ProjetoBiblioteca.Models.Livros", "Livro")
                         .WithMany()
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjetoBiblioteca.Models.Livros", null)
+                        .WithMany("Emprestimos")
+                        .HasForeignKey("LivrosId");
+
+                    b.HasOne("ProjetoBiblioteca.Models.Usuario", "Usuario")
+                        .WithMany("Emprestimos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjetoBiblioteca.Models.Livros", "livro")
-                        .WithMany()
-                        .HasForeignKey("livroId");
+                    b.Navigation("Livro");
 
-                    b.Navigation("livro");
+                    b.Navigation("Usuario");
+                });
 
-                    b.Navigation("usuario");
+            modelBuilder.Entity("ProjetoBiblioteca.Models.Livros", b =>
+                {
+                    b.Navigation("Emprestimos");
+                });
+
+            modelBuilder.Entity("ProjetoBiblioteca.Models.Usuario", b =>
+                {
+                    b.Navigation("Emprestimos");
                 });
 #pragma warning restore 612, 618
         }
