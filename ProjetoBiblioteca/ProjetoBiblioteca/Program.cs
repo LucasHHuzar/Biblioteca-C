@@ -75,7 +75,7 @@ app.MapPost("/api/livros/cadastrar", ([FromBody] Livros livros, [FromServices] A
 
 });
 
-//POST: http://localhost:5077/api/usuario/cadastrar/
+//POST: http://localhost:5077/api/Usuario/cadastrar/
 app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromServices] AppDataContext ctx) =>
 {
     //Valdação dos atributos do produto
@@ -102,7 +102,20 @@ app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromService
 
 });
 
-//DELETE: http://localhost:****/api/Livros/deletar/
+//GET: http://localhost:5077/api/Usuario/listar
+app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) =>
+{
+
+    if (ctx.Usuarios.Any())
+    {
+        return Results.Ok(ctx.Usuarios.ToList());
+    }
+
+    return Results.NotFound("Tabela vazia!");
+
+});
+
+//DELETE: http://localhost:5077/api/Livros/deletar/
 app.MapDelete("/api/livros/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
     Livros? livros = ctx.Livros.Find(id);
