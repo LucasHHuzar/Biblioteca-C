@@ -32,8 +32,7 @@ namespace ProjetoBiblioteca.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     Telefone = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -48,11 +47,9 @@ namespace ProjetoBiblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LivroId = table.Column<string>(type: "TEXT", nullable: false),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DataEmprestimo = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DataDevolucao = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    LivrosId = table.Column<string>(type: "TEXT", nullable: true)
+                    LivroId = table.Column<string>(type: "TEXT", nullable: true),
+                    UsuarioId = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEmprestimo = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,30 +58,18 @@ namespace ProjetoBiblioteca.Migrations
                         name: "FK_Emprestimos_Livros_LivroId",
                         column: x => x.LivroId,
                         principalTable: "Livros",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Emprestimos_Livros_LivrosId",
-                        column: x => x.LivrosId,
-                        principalTable: "Livros",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Emprestimos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Emprestimos_LivroId",
                 table: "Emprestimos",
                 column: "LivroId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Emprestimos_LivrosId",
-                table: "Emprestimos",
-                column: "LivrosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Emprestimos_UsuarioId",

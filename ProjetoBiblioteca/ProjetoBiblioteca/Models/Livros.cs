@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjetoBiblioteca.Models;
 
-
 public class Livros
 {
     public Livros ()
@@ -30,7 +29,6 @@ public class Livros
     public string? Genero { get; set; }
     public int ExemplaresDisponiveis { get; set; }
     public DateTime CriadoEm { get; set; }
-
      public ICollection<Emprestimo> Emprestimos { get; set; }
 
 }

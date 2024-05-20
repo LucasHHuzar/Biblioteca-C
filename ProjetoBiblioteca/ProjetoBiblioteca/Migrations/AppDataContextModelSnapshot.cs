@@ -23,27 +23,18 @@ namespace ProjetoBiblioteca.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("DataDevolucao")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("DataEmprestimo")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LivroId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LivrosId")
+                    b.Property<string>("UsuarioId")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LivroId");
-
-                    b.HasIndex("LivrosId");
 
                     b.HasIndex("UsuarioId");
 
@@ -80,9 +71,8 @@ namespace ProjetoBiblioteca.Migrations
 
             modelBuilder.Entity("ProjetoBiblioteca.Models.Usuario", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
@@ -98,20 +88,12 @@ namespace ProjetoBiblioteca.Migrations
             modelBuilder.Entity("ProjetoBiblioteca.Models.Emprestimo", b =>
                 {
                     b.HasOne("ProjetoBiblioteca.Models.Livros", "Livro")
-                        .WithMany()
-                        .HasForeignKey("LivroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjetoBiblioteca.Models.Livros", null)
                         .WithMany("Emprestimos")
-                        .HasForeignKey("LivrosId");
+                        .HasForeignKey("LivroId");
 
                     b.HasOne("ProjetoBiblioteca.Models.Usuario", "Usuario")
                         .WithMany("Emprestimos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("Livro");
 
