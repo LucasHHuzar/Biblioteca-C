@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 //Listar
-//GET: http://localhost:****/api/Livros/listar
+//GET: http://localhost:5077/api/Livros/listar
 app.MapGet("/api/livros/listar", ([FromServices] AppDataContext ctx) =>
 {
 
@@ -32,7 +32,7 @@ app.MapGet("/api/livros/listar", ([FromServices] AppDataContext ctx) =>
 });
 
 //Buscar
-//GET: http://localhost:****/api/Livros/buscar/
+//GET: http://localhost:5077/api/Livros/buscar/
 app.MapGet("/api/livros/buscar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) =>
 {
     //Expressão lambda em C#
@@ -67,7 +67,7 @@ app.MapPost("/api/livros/cadastrar", ([FromBody] Livros livros, [FromServices] A
         return Results.BadRequest("Já existe um livro com o mesmo nome");
     }
 
-    //Adicionar o produto dentro do banco de dados
+    //Adicionar o produto dentro do banco de dados""
     ctx.Livros.Add(livros);
     ctx.SaveChanges();
 
