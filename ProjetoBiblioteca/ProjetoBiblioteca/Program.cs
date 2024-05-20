@@ -75,7 +75,7 @@ app.MapPost("/api/livros/cadastrar", ([FromBody] Livros livros, [FromServices] A
 
 });
 
-//POST: http://localhost:****/api/Usuario/cadastrar/
+//POST: http://localhost:5077/api/usuario/cadastrar/
 app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromServices] AppDataContext ctx) =>
 {
     //Valdação dos atributos do produto
@@ -91,10 +91,10 @@ app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromService
 
     if(usuarioBuscado is not null)
     {
-        return Results.BadRequest("Já existe um livro com o mesmo nome");
+        return Results.BadRequest("Já existe um usuário com o mesmo nome.");
     }
 
-    //Adicionar o produto dentro do banco de dados
+    //Adicionar o usuario dentro do banco de dados
     ctx.Usuarios.Add(usuarios);
     ctx.SaveChanges();
 
