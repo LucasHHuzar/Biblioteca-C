@@ -33,10 +33,10 @@ app.MapGet("/api/livros/listar", ([FromServices] AppDataContext ctx) =>
 
 //Buscar
 //GET: http://localhost:5077/api/Livros/buscar/
-app.MapGet("/api/livros/buscar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) =>
+app.MapGet("/api/livros/buscar/{titulo}", ([FromRoute] string titulo, [FromServices] AppDataContext ctx) =>
 {
     //Expressão lambda em C#
-    Livros? livros = ctx.Livros.FirstOrDefault(x => x.Id == id);
+    Livros? livros = ctx.Livros.FirstOrDefault(x => x.Titulo == titulo);
     
     if(livros is null)
     {
@@ -101,7 +101,7 @@ app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromService
     return Results.Created("", usuarios);
 
 });
-
+//listando usuarios
 //GET: http://localhost:5077/api/Usuario/listar
 app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) =>
 {
@@ -115,10 +115,26 @@ app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) =>
 
 });
 
-//DELETE: http://localhost:5077/api/Livros/deletar/
-app.MapDelete("/api/livros/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+//Buscar usuario
+//GET: http://localhost:5077/api/Usuario/buscar/
+app.MapGet("/api/Usuario/buscar/{nome}", ([FromRoute] string nome, [FromServices] AppDataContext ctx) =>
 {
-    Livros? livros = ctx.Livros.Find(id);
+    //Expressão lambda em C#
+    Usuario? usuario = ctx.Usuarios.FirstOrDefault(x => x.Nome == nome);
+    
+    if(usuario is null)
+    {
+        return Results.NotFound("Livro não encontrado!");
+    }
+
+    //Produto não encontrado é após o laço de repetição
+    return Results.Ok(usuario);
+});
+
+//DELETE: http://localhost:5077/api/Livros/deletar/
+app.MapDelete("/api/livros/deletar/{Id}", ([FromRoute] string Id, [FromServices] AppDataContext ctx) => 
+{
+    Livros? livros = ctx.Livros.Find(Id);
 
     if(livros is null)
     {
@@ -129,6 +145,23 @@ app.MapDelete("/api/livros/deletar/{id}", ([FromRoute] int id, [FromServices] Ap
     ctx.SaveChanges();
 
     return Results.Ok("Livro removido com sucesso!");
+
+});
+
+//DELETE: http://localhost:5077/api/Usuario/deletar/
+app.MapDelete("/api/usuario/deletar/{Id}", ([FromRoute] string Id, [FromServices] AppDataContext ctx) => 
+{
+    Usuario? usuario = ctx.Usuarios.Find(Id);
+
+    if(usuario is null)
+    {
+        return Results.NotFound("Usuario não encontrado!"); 
+    }
+    
+    ctx.Usuarios.Remove(usuario);
+    ctx.SaveChanges();
+
+    return Results.Ok("Usuario removido com sucesso!");
 
 });
 
