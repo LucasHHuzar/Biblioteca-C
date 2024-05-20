@@ -2,7 +2,20 @@ namespace ProjetoBiblioteca.Models;
 
 public class Usuario
 {
-    public int Id { get; set; }
+    public Usuario ()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
+
+    public Usuario 
+    (string nome, string telefone)
+    {
+        Id = Guid.NewGuid().ToString();
+        Nome = nome;
+        Telefone = telefone;
+
+    }
+    public string? Id { get; set; }
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
 }
