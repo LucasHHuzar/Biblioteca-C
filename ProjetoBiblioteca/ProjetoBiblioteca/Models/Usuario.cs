@@ -5,6 +5,7 @@ public class Usuario
     public Usuario ()
     {
         Id = Guid.NewGuid().ToString();
+        Emprestimos = new List<Emprestimo>();
     }
 
     public Usuario 
@@ -13,6 +14,7 @@ public class Usuario
         Id = Guid.NewGuid().ToString();
         Nome = nome;
         Telefone = telefone;
+        Emprestimos = new List<Emprestimo>();
     }
 
     public string? Id { get; set; }

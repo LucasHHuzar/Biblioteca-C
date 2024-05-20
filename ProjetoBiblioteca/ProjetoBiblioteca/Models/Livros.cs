@@ -8,6 +8,7 @@ public class Livros
     {   
         Id = Guid.NewGuid().ToString();
         CriadoEm = DateTime.Now;
+        Emprestimos = new List<Emprestimo>();
     }
 
     public Livros 
@@ -20,6 +21,7 @@ public class Livros
         ExemplaresDisponiveis = exemplaresDisponiveis;
         Id = Guid.NewGuid().ToString();
         CriadoEm = DateTime.Now;
+        Emprestimos = new List<Emprestimo>();
     }
 
     public string? Id { get; set; }
