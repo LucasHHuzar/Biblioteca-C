@@ -11,7 +11,7 @@ using ProjetoBiblioteca.Models;
 namespace ProjetoBiblioteca.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20240520004423_banco_biblioteca")]
+    [Migration("20240520014322_banco_biblioteca")]
     partial class banco_biblioteca
     {
         /// <inheritdoc />
@@ -30,9 +30,11 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LivroId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UsuarioId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -92,11 +94,15 @@ namespace ProjetoBiblioteca.Migrations
                 {
                     b.HasOne("ProjetoBiblioteca.Models.Livros", "Livro")
                         .WithMany("Emprestimos")
-                        .HasForeignKey("LivroId");
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProjetoBiblioteca.Models.Usuario", "Usuario")
                         .WithMany("Emprestimos")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Livro");
 

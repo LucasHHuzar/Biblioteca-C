@@ -27,9 +27,11 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LivroId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UsuarioId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -89,11 +91,15 @@ namespace ProjetoBiblioteca.Migrations
                 {
                     b.HasOne("ProjetoBiblioteca.Models.Livros", "Livro")
                         .WithMany("Emprestimos")
-                        .HasForeignKey("LivroId");
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProjetoBiblioteca.Models.Usuario", "Usuario")
                         .WithMany("Emprestimos")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Livro");
 

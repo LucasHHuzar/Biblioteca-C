@@ -47,8 +47,8 @@ namespace ProjetoBiblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LivroId = table.Column<string>(type: "TEXT", nullable: true),
-                    UsuarioId = table.Column<string>(type: "TEXT", nullable: true),
+                    LivroId = table.Column<string>(type: "TEXT", nullable: false),
+                    UsuarioId = table.Column<string>(type: "TEXT", nullable: false),
                     DataEmprestimo = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -58,12 +58,14 @@ namespace ProjetoBiblioteca.Migrations
                         name: "FK_Emprestimos_Livros_LivroId",
                         column: x => x.LivroId,
                         principalTable: "Livros",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Emprestimos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

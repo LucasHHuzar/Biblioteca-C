@@ -75,6 +75,40 @@ app.MapPost("/api/livros/cadastrar", ([FromBody] Livros livros, [FromServices] A
 
 });
 
+//POST: http://localhost:5077/api/emprestimo/cadastrar/
+app.MapPost("/api/emprestimo/cadastrar", async ([FromBody] Emprestimo emprestimo, [FromServices] AppDataContext ctx) =>
+{
+    // Validação dos atributos do empréstimo
+    List<ValidationResult> erros = new List<ValidationResult>();
+
+    if (!Validator.TryValidateObject(emprestimo, new ValidationContext(emprestimo), erros, true))
+    {
+        return Results.BadRequest(erros);
+    }
+
+    // Verificar se o usuário existe
+    Usuario? usuario = await ctx.Usuarios.FindAsync(emprestimo.UsuarioId);
+    if (usuario == null)
+    {
+        return Results.BadRequest("Usuário não encontrado.");
+    }
+
+    // Verificar se o livro existe
+    Livros? livro = await ctx.Livros.FindAsync(emprestimo.LivroId);
+    if (livro == null)
+    {
+        return Results.BadRequest("Livro não encontrado.");
+    }
+
+    // Adicionar o empréstimo ao banco de dados
+    emprestimo.DataEmprestimo = DateTime.Now;
+    ctx.Emprestimos.Add(emprestimo);
+    await ctx.SaveChangesAsync();
+
+    return Results.Created($"/api/emprestimo/{emprestimo.Id}", emprestimo);
+});
+
+
 //POST: http://localhost:5077/api/Usuario/cadastrar/
 app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromServices] AppDataContext ctx) =>
 {
@@ -101,6 +135,7 @@ app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario usuarios, [FromService
     return Results.Created("", usuarios);
 
 });
+
 //listando usuarios
 //GET: http://localhost:5077/api/Usuario/listar
 app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) =>
