@@ -16,6 +16,7 @@ public class Emprestimo
     {   
         LivroId = livroId;
         UsuarioId = usuarioId;
+        DataEmprestimo = DateTime.Now;
     }
     
 
