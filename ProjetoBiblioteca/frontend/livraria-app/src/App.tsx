@@ -1,14 +1,21 @@
-import React from "react";
-//1 - Um componente SEMPRE deve começar com a primeira letra
-//maiúscula
-//2 - Todo componente DEVE ser uma função do JS
-//3 - Todo deve retornar apenas UM elemento HTML
-function App() {
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LivrosList from './components/LivrosList';
+import AddLivro from './components/AddLivro';
+import UsuariosList from './components/UsuariosList';
+import AddUsuario from './components/AddUsuario';
+
+const App: React.FC = () => {
   return (
-    <div>
-      <h1>Projeto base em React com TypeScript</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/livros/listar" element={<LivrosList />} />
+        <Route path="/livros/adicionar" element={<AddLivro />} />
+        <Route path="/usuarios/listar" element={<UsuariosList />} />
+        <Route path="/usuarios/adicionar" element={<AddUsuario />} />
+      </Routes>
+    </Router>
   );
-}
-//4 - OBRIGATORIAMENTE o componente DEVE ser exportado
+};
+
 export default App;

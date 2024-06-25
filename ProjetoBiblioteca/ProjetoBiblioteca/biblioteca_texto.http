@@ -1,6 +1,7 @@
-@base_url = https://localhost:5077/api
+@base_url = http://localhost:5077/api
 
 # LIVRO ######################################
+http://localhost:5077/api/Usuario/listar
 
 ### Criação de um novo livro
 POST {{base_url}}/livros/cadastrar
@@ -8,11 +9,11 @@ Content-Type: application/json
 
 {
     "Id": "int",
-    "Titulo" : " nome",
-    "Autor" : "nome",
-    "AnoPublicacao" : "int",
-    "Genero" : "genero",
-    "ExemplaresDisponiveis" : "int"
+    "Titulo" : "Prova de fogo",
+    "Autor" : "matus",
+    "AnoPublicacao" : "2010",
+    "Genero" : "romance",
+    "ExemplaresDisponiveis" : "2"
 }
 
 ### Obtenção de todos os livros
@@ -44,3 +45,4 @@ Content-Type: application/json
 
 ### Obtenção de todos os livros
 GET {{base_url}}/livros/listar
+
