@@ -1,48 +1,84 @@
 @base_url = http://localhost:5077/api
 
-# LIVRO ######################################
-http://localhost:5077/api/Usuario/listar
+# LIVROS ######################################
 
 ### Criação de um novo livro
 POST {{base_url}}/livros/cadastrar
 Content-Type: application/json
 
 {
-    "Id": "int",
     "Titulo" : "Prova de fogo",
-    "Autor" : "matus",
-    "AnoPublicacao" : "2010",
+    "Autor" : "matheus",
+    "AnoPublicacao" : 2010,
     "Genero" : "romance",
-    "ExemplaresDisponiveis" : "2"
+    "ExemplaresDisponiveis" : 2
 }
 
 ### Obtenção de todos os livros
 GET {{base_url}}/livros/listar
 
+### Busca de um livro pelo título
+GET {{base_url}}/livros/buscar/Prova de fogo
+
+### Atualização de um livro
+PUT {{base_url}}/livros/alterar/{id}
+Content-Type: application/json
+
+{
+    "Titulo" : "Prova de fogo - Edição Revisada",
+    "Autor" : "matus",
+    "AnoPublicacao" : 2010,
+    "Genero" : "romance",
+    "ExemplaresDisponiveis" : 3
+}
+
+### Deleção de um livro
+DELETE {{base_url}}/livros/deletar/{id}
+
 # USUARIOS ############################################
 
-### Criação de um novo usuario
+### Criação de um novo usuário
 POST {{base_url}}/usuario/cadastrar
 Content-Type: application/json
 
 {
-    "Id": "int",
-    "Nome" : " nome",
-    "Telefone" : "string"
+    "Nome" : "Pedro",
+    "Telefone" : "133456789"
 }
 
-# EMPRESTIMO     #####################################
+### Obtenção de todos os usuários
+GET {{base_url}}/usuario/listar
 
-### Criação de um novo emprestimo
+### Busca de um usuário pelo nome
+GET {{base_url}}/usuario/buscar/João
+
+### Deleção de um usuário
+DELETE {{base_url}}/usuario/deletar/{id}
+
+# EMPRESTIMO #####################################
+
+### Criação de um novo empréstimo
 POST {{base_url}}/emprestimo/cadastrar
 Content-Type: application/json
 
 {
-    "Id": "int",
-    "LivroId" : " int",
-    "UsuarioId" : "int"
+    "LivroId" : "4fb2db1b-4bbc-4a6d-b5d4-970f6e2e12b7",
+    "UsuarioId" : "dc876014-c398-4060-a7d5-ba821197e501"
 }
 
-### Obtenção de todos os livros
-GET {{base_url}}/livros/listar
+### Obtenção de todos os empréstimos
+GET {{base_url}}/emprestimo/listar
 
+# DEVOLUCAO #####################################
+
+### Criação de uma nova devolução
+POST {{base_url}}/devolucao/cadastrar
+Content-Type: application/json
+
+{
+    "LivroId" : "{livroId}",
+    "UsuarioId" : "{usuarioId}"
+}
+
+### Obtenção de todas as devoluções
+GET {{base_url}}/devolucao/listar

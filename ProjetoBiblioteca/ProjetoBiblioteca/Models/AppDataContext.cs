@@ -9,24 +9,34 @@ public class AppDataContext : DbContext
     public DbSet<Livros> Livros { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Emprestimo> Emprestimos { get; set; }
+
+    public DbSet<Devolucao> Devolucoes { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("Data Source=banco_biblioteca.db");
     }
-
-     protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configurar relacionamento entre Usuario e Emprestimo
             modelBuilder.Entity<Emprestimo>()
                 .HasOne(e => e.Usuario)
                 .WithMany(u => u.Emprestimos)
                 .HasForeignKey(e => e.UsuarioId);
 
-            // Configurar relacionamento entre Livros e Emprestimo
             modelBuilder.Entity<Emprestimo>()
                 .HasOne(e => e.Livro)
-                .WithMany()
+                .WithMany(l => l.Emprestimos)
                 .HasForeignKey(e => e.LivroId);
+
+            modelBuilder.Entity<Devolucao>()
+                .HasOne(d => d.Usuario)
+                .WithMany()
+                .HasForeignKey(d => d.UsuarioId);
+
+            modelBuilder.Entity<Devolucao>()
+                .HasOne(d => d.Livro)
+                .WithMany()
+                .HasForeignKey(d => d.LivroId);
         }
+
 
 }
