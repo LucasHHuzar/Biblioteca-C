@@ -82,3 +82,7 @@ Content-Type: application/json
 
 ### Obtenção de todas as devoluções
 GET {{base_url}}/devolucao/listar
+
+### Obtenção de todas os empréstimos
+
+GET {{base_url}}/emprestimo/listar
