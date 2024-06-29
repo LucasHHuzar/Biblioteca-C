@@ -13,11 +13,24 @@ const LivrosListar: React.FC = () => {
   return (
     <div>
       <h1>Lista de Livros</h1>
-      <ul>
-        {livros.map(livro => (
-          <li key={livro.id}>{livro.titulo}</li>
-        ))}
-      </ul>
+      <table border={1}>
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Ano de Publicação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {livros.map(livro => (
+              <tr>
+              <td>{livro.titulo}</td>
+              <td>{livro.autor}</td>
+              <td>{livro.anoPublicacao}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
