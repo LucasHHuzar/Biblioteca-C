@@ -8,8 +8,6 @@ namespace ProjetoBiblioteca.Models
     {
         public Livros()
         {
-            Id = Guid.NewGuid().ToString();
-            CriadoEm = DateTime.Now;
             Emprestimos = new List<Emprestimo>();
         }
 
@@ -20,18 +18,16 @@ namespace ProjetoBiblioteca.Models
             AnoPublicacao = anoPublicacao;
             Genero = genero;
             ExemplaresDisponiveis = exemplaresDisponiveis;
-            Id = Guid.NewGuid().ToString();
-            CriadoEm = DateTime.Now;
             Emprestimos = new List<Emprestimo>();
         }
 
-        public string? Id { get; set; }
+        public string? Id { get; set; } = Guid.NewGuid().ToString();
         public string? Titulo { get; set; }
         public string? Autor { get; set; }
         public int AnoPublicacao { get; set; }
         public string? Genero { get; set; }
         public int ExemplaresDisponiveis { get; set; }
-        public DateTime CriadoEm { get; set; }
-        public ICollection<Emprestimo> Emprestimos { get; set; }
+        public DateTime CriadoEm { get; set; } = DateTime.Now;
+        public ICollection<Emprestimo> Emprestimos { get; set; } = [];
     }
 }

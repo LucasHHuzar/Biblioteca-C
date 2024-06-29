@@ -62,8 +62,8 @@ POST {{base_url}}/emprestimo/cadastrar
 Content-Type: application/json
 
 {
-    "LivroId" : "4fb2db1b-4bbc-4a6d-b5d4-970f6e2e12b7",
-    "UsuarioId" : "dc876014-c398-4060-a7d5-ba821197e501"
+    "LivroId" : "b0655a85-0436-4249-8188-5016c13a3a83",
+    "UsuarioId" : "8427c052-2423-446a-a089-7b664b7e7fa5"
 }
 
 ### Obtenção de todos os empréstimos
@@ -76,8 +76,8 @@ POST {{base_url}}/devolucao/cadastrar
 Content-Type: application/json
 
 {
-    "LivroId" : "{livroId}",
-    "UsuarioId" : "{usuarioId}"
+    "LivroId" : "b0655a85-0436-4249-8188-5016c13a3a83",
+    "UsuarioId" : "8427c052-2423-446a-a089-7b664b7e7fa5"
 }
 
 ### Obtenção de todas as devoluções

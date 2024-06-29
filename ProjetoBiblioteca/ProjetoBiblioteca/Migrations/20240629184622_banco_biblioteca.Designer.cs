@@ -11,14 +11,14 @@ using ProjetoBiblioteca.Models;
 namespace ProjetoBiblioteca.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20240629175051_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240629184622_banco_biblioteca")]
+    partial class banco_biblioteca
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
 
             modelBuilder.Entity("ProjetoBiblioteca.Models.Devolucao", b =>
                 {
@@ -77,7 +77,6 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Autor")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CriadoEm")
@@ -87,11 +86,9 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Genero")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Titulo")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

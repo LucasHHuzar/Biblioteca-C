@@ -14,12 +14,14 @@ builder.Services.AddDbContext<AppDataContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Adicionar serviços necessários para a API (como controladores)
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-    });
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
 
+
+builder.Services.AddCors(options => options.AddPolicy("Acesso Total",
+configs => configs.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 
 var app = builder.Build();
@@ -105,31 +107,32 @@ app.MapPut("/api/livros/alterar/{id}", ([FromRoute] string id, [FromBody] Livros
 
 //Cadastrar Empréstimo
 //POST: http://localhost:5077/api/emprestimo/cadastrar
-app.MapPost("/api/emprestimo/cadastrar", async ([FromBody] Emprestimo emprestimo, [FromServices] AppDataContext ctx) =>
+app.MapPost("/api/emprestimo/cadastrar", ([FromBody] Emprestimo emprestimo, [FromServices] AppDataContext ctx) =>
 {
-    // List<ValidationResult> erros = new List<ValidationResult>();
-    // if (!Validator.TryValidateObject(emprestimo, new ValidationContext(emprestimo), erros, true))
-    // {
-    //     return Results.BadRequest(erros);
-    // }
+    List<ValidationResult> erros = new List<ValidationResult>();
+    if (!Validator.TryValidateObject(emprestimo, new ValidationContext(emprestimo), erros, true))
+    {
+        return Results.BadRequest(erros);
+    }
 
-    Usuario? usuario = await ctx.Usuarios.FindAsync(emprestimo.UsuarioId);
+    Usuario? usuario = ctx.Usuarios.Find(emprestimo.UsuarioId);
     if (usuario == null)
     {
         return Results.BadRequest("Usuário não encontrado.");
     }
 
-    Livros? livro = await ctx.Livros.FindAsync(emprestimo.LivroId);
+    Livros? livro = ctx.Livros.Find(emprestimo.LivroId);
     if (livro == null)
     {
         return Results.BadRequest("Livro não encontrado.");
     }
-
-    emprestimo.DataEmprestimo = DateTime.Now;
+    
+    // emprestimo.Id = Guid.NewGuid().ToString();
+    // emprestimo.DataEmprestimo = DateTime.Now;
     ctx.Emprestimos.Add(emprestimo);
-    await ctx.SaveChangesAsync();
+    ctx.SaveChanges();
 
-    return Results.Created($"/api/emprestimo/{emprestimo.Id}", emprestimo);
+    return Results.Ok("Empréstimo realizado!");
 });
 
 //Cadastrar Usuário
@@ -208,7 +211,7 @@ app.MapDelete("/api/usuario/deletar/{id}", ([FromRoute] string id, [FromServices
 
 //Cadastrar Devolução
 //POST: http://localhost:5077/api/devolucao/cadastrar
-app.MapPost("/api/devolucao/cadastrar", async ([FromBody] Devolucao devolucao, [FromServices] AppDataContext ctx) =>
+app.MapPost("/api/devolucao/cadastrar", ([FromBody] Devolucao devolucao, [FromServices] AppDataContext ctx) =>
 {
     List<ValidationResult> erros = new List<ValidationResult>();
     if (!Validator.TryValidateObject(devolucao, new ValidationContext(devolucao), erros, true))
@@ -216,23 +219,24 @@ app.MapPost("/api/devolucao/cadastrar", async ([FromBody] Devolucao devolucao, [
         return Results.BadRequest(erros);
     }
 
-    Usuario? usuario = await ctx.Usuarios.FindAsync(devolucao.UsuarioId);
+    Usuario? usuario = ctx.Usuarios.Find(devolucao.UsuarioId);
     if (usuario == null)
     {
         return Results.BadRequest("Usuário não encontrado.");
     }
 
-    Livros? livro = await ctx.Livros.FindAsync(devolucao.LivroId);
+    Livros? livro = ctx.Livros.Find(devolucao.LivroId);
     if (livro == null)
     {
         return Results.BadRequest("Livro não encontrado.");
     }
 
-    devolucao.DataDevolucao = DateTime.Now;
     ctx.Devolucoes.Add(devolucao);
-    await ctx.SaveChangesAsync();
+    ctx.SaveChanges();
 
-    return Results.Created($"/api/devolucao/{devolucao.Id}", devolucao);
+    return Results.Ok("Devolução realizada!");
 });
+
+app.UseCors("Acesso Total");
 
 app.Run();

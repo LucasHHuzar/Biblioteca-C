@@ -15,7 +15,7 @@ namespace ProjetoBiblioteca.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
 
             modelBuilder.Entity("ProjetoBiblioteca.Models.Devolucao", b =>
                 {
@@ -74,7 +74,6 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Autor")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CriadoEm")
@@ -84,11 +83,9 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Genero")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Titulo")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

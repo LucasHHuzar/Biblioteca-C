@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetoBiblioteca.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class banco_biblioteca : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,10 +16,10 @@ namespace ProjetoBiblioteca.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Titulo = table.Column<string>(type: "TEXT", nullable: false),
-                    Autor = table.Column<string>(type: "TEXT", nullable: false),
+                    Titulo = table.Column<string>(type: "TEXT", nullable: true),
+                    Autor = table.Column<string>(type: "TEXT", nullable: true),
                     AnoPublicacao = table.Column<int>(type: "INTEGER", nullable: false),
-                    Genero = table.Column<string>(type: "TEXT", nullable: false),
+                    Genero = table.Column<string>(type: "TEXT", nullable: true),
                     ExemplaresDisponiveis = table.Column<int>(type: "INTEGER", nullable: false),
                     CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },

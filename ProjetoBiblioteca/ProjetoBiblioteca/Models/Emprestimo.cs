@@ -6,10 +6,6 @@ namespace ProjetoBiblioteca.Models
 {
     public class Emprestimo
     {
-        public Emprestimo()
-        {
-            DataEmprestimo = DateTime.Now;
-        }
 
         public Emprestimo(string livroId, string usuarioId)
         {
@@ -21,15 +17,13 @@ namespace ProjetoBiblioteca.Models
         public string? Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
-        [ForeignKey("Livro")]
         public string? LivroId { get; set; }
-        public Livros? Livro { get; set; }
+        public Livros? Livro { get; set; } = null;
         
         [Required]
-        [ForeignKey("Usuario")]
         public string? UsuarioId { get; set; }
-        public Usuario? Usuario { get; set; }
+        public Usuario? Usuario { get; set; } = null;
 
-        public DateTime DataEmprestimo { get; set; }
+        public DateTime DataEmprestimo { get; set; } = DateTime.Now;
     }
 }
