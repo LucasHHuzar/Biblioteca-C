@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getLivros } from '../services/api';
 
-const LivrosList: React.FC = () => {
+const LivrosListar: React.FC = () => {
   const [livros, setLivros] = useState<any[]>([]);
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const LivrosList: React.FC = () => {
   );
 };
 
-export default LivrosList;
+export default LivrosListar;

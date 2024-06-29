@@ -1,30 +1,46 @@
 import React, { useState } from 'react';
 import { addLivro } from '../services/api';
 
-const AddLivro: React.FC = () => {
+const AddLivro = () => {
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
-  const [anoPublicacao, setAnoPublicacao] = useState(0);
+  const [anoPublicacao, setAnoPublicacao] = useState('');
   const [genero, setGenero] = useState('');
-  const [exemplaresDisponiveis, setExemplaresDisponiveis] = useState(0);
+  const [exemplaresDisponiveis, setExemplaresDisponiveis] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const cadastrarLivro = (e : any) => {
     e.preventDefault();
-    const novoLivro = { titulo, autor, anoPublicacao, genero, exemplaresDisponiveis };
+    if (!titulo || !autor || !anoPublicacao || !genero || !exemplaresDisponiveis) {
+      setError('Todos os campos são obrigatórios.');
+      return;
+    }
+    const novoLivro = { 
+      titulo, 
+      autor, 
+      anoPublicacao: parseInt(anoPublicacao), 
+      genero, 
+      exemplaresDisponiveis: parseInt(exemplaresDisponiveis) 
+    };
     addLivro(novoLivro)
       .then(() => {
         setTitulo('');
         setAutor('');
-        setAnoPublicacao(0);
+        setAnoPublicacao('');
         setGenero('');
-        setExemplaresDisponiveis(0);
+        setExemplaresDisponiveis('');
+        setError('');
       })
-      .catch((error: Error) => console.error('Erro ao adicionar livro:', error));
+      .catch((error) => {
+        console.error('Erro ao adicionar livro:', error);
+        setError('Erro ao adicionar livro. Tente novamente mais tarde.');
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={cadastrarLivro}>
       <h1>Adicionar Livro</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <label>
         Título:
         <input type="text" value={titulo} onChange={e => setTitulo(e.target.value)} />
@@ -35,7 +51,7 @@ const AddLivro: React.FC = () => {
       </label>
       <label>
         Ano de Publicação:
-        <input type="number" value={anoPublicacao} onChange={e => setAnoPublicacao(parseInt(e.target.value))} />
+        <input type="number" value={anoPublicacao} onChange={e => setAnoPublicacao(e.target.value)} />
       </label>
       <label>
         Gênero:
@@ -43,7 +59,7 @@ const AddLivro: React.FC = () => {
       </label>
       <label>
         Exemplares Disponíveis:
-        <input type="number" value={exemplaresDisponiveis} onChange={e => setExemplaresDisponiveis(parseInt(e.target.value))} />
+        <input type="number" value={exemplaresDisponiveis} onChange={e => setExemplaresDisponiveis(e.target.value)} />
       </label>
       <button type="submit">Adicionar Livro</button>
     </form>

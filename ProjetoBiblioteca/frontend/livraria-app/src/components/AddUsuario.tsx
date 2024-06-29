@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { addUsuario } from '../services/api';
 
-const AddUsuario: React.FC = () => {
+const AddUsuario = () => {
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const novoUsuario = { nome, telefone };
     addUsuario(novoUsuario)
@@ -13,7 +13,7 @@ const AddUsuario: React.FC = () => {
         setNome('');
         setTelefone('');
       })
-      .catch((error: Error) => console.error('Erro ao adicionar usuário:', error));
+      .catch((error) => console.error('Erro ao adicionar usuário:', error));
   };
 
   return (
