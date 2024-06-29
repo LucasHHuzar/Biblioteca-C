@@ -237,6 +237,30 @@ app.MapPost("/api/devolucao/cadastrar", ([FromBody] Devolucao devolucao, [FromSe
     return Results.Ok("Devolução realizada!");
 });
 
+//Get todas as devoluções
+//GET: http://localhost:5077/api/devolucao/listar
+app.MapGet("/api/devolucao/listar", ([FromServices] AppDataContext ctx) =>
+{
+    if (ctx.Devolucoes.Any())
+    {
+        return Results.Ok(ctx.Devolucoes.ToList());
+    }
+    return Results.NotFound("Tabela vazia!");
+});
+
+//GET todos os empréstimos
+//GET: http://localhost:5077/api/emprestimo/listar
+app.MapGet("/api/emprestimo/listar", ([FromServices] AppDataContext ctx) =>
+{
+    if (ctx.Emprestimos.Any())
+    {
+        return Results.Ok(ctx.Emprestimos.ToList());
+    }
+    return Results.NotFound("Tabela vazia!");
+});
+
+
+
 app.UseCors("Acesso Total");
 
 app.Run();
