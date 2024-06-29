@@ -25,11 +25,11 @@ namespace ProjetoBiblioteca.Models
             Emprestimos = new List<Emprestimo>();
         }
 
-        public string Id { get; set; }
-        public string Titulo { get; set; }
-        public string Autor { get; set; }
+        public string? Id { get; set; }
+        public string? Titulo { get; set; }
+        public string? Autor { get; set; }
         public int AnoPublicacao { get; set; }
-        public string Genero { get; set; }
+        public string? Genero { get; set; }
         public int ExemplaresDisponiveis { get; set; }
         public DateTime CriadoEm { get; set; }
         public ICollection<Emprestimo> Emprestimos { get; set; }
