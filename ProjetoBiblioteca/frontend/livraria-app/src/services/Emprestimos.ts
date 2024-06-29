@@ -5,7 +5,7 @@ export interface Emprestimos {
     id?: string;
     livroId: string;
     livros: Livros;
-    usuarioId: number;
+    usuarioId: string;
     usuarios: Usuarios;
     dataEmprestimo: number;
   }

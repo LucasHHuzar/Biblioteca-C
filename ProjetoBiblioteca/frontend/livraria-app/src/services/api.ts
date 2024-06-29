@@ -8,5 +8,6 @@ export const getLivros = () => api.get('/livros/listar');
 export const getUsuarios = () => api.get('/usuario/listar');
 export const addLivro = (livro: any) => api.post('/livros/cadastrar', livro);
 export const addUsuario = (usuario: any) => api.post('/usuario/cadastrar', usuario);
+export const emprestimo = (emprestimos: any) => api.post('/emprestimo/cadastrar', emprestimos);
 
 export default api;
