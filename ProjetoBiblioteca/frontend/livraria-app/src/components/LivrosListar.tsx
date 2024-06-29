@@ -16,6 +16,7 @@ const LivrosListar: React.FC = () => {
       <table border={1}>
         <thead>
           <tr>
+            <th>Id Livro</th>
             <th>Titulo</th>
             <th>Autor</th>
             <th>Ano de Publicação</th>
@@ -23,7 +24,8 @@ const LivrosListar: React.FC = () => {
         </thead>
         <tbody>
           {livros.map(livro => (
-              <tr>
+              <tr key={livro.livroId}>
+              <td>{livro.livroId}</td>
               <td>{livro.titulo}</td>
               <td>{livro.autor}</td>
               <td>{livro.anoPublicacao}</td>

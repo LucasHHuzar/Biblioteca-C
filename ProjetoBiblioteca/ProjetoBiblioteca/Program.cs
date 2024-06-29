@@ -127,8 +127,6 @@ app.MapPost("/api/emprestimo/cadastrar", ([FromBody] Emprestimo emprestimo, [Fro
         return Results.BadRequest("Livro não encontrado.");
     }
     
-    // emprestimo.Id = Guid.NewGuid().ToString();
-    // emprestimo.DataEmprestimo = DateTime.Now;
     ctx.Emprestimos.Add(emprestimo);
     ctx.SaveChanges();
 

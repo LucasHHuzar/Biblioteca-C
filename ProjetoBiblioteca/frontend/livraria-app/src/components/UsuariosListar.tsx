@@ -16,6 +16,7 @@ const UsuariosList: React.FC = () => {
       <table border={1}>
         <thead>
           <tr>
+            <th>Id Usuario</th>
             <th>Nome</th>
             <th>Telefone</th>
             <th>Emprestimos</th>
@@ -23,7 +24,8 @@ const UsuariosList: React.FC = () => {
         </thead>
         <tbody>
           {usuarios.map(usuario => (
-              <tr>
+              <tr key={usuario.usuarioId}>
+              <td>{usuario.usuarioId}</td>
               <td>{usuario.nome}</td>
               <td>{usuario.telefone}</td>
               <td>{usuario.emprestimo}</td>
