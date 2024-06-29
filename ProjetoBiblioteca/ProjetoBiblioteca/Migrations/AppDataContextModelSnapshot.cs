@@ -17,11 +17,33 @@ namespace ProjetoBiblioteca.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
 
+            modelBuilder.Entity("ProjetoBiblioteca.Models.Devolucao", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataDevolucao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LivroId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LivroId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Devolucoes");
+                });
+
             modelBuilder.Entity("ProjetoBiblioteca.Models.Emprestimo", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DataEmprestimo")
                         .HasColumnType("TEXT");
@@ -52,6 +74,7 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Autor")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CriadoEm")
@@ -61,9 +84,11 @@ namespace ProjetoBiblioteca.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Genero")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Titulo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -85,6 +110,21 @@ namespace ProjetoBiblioteca.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("ProjetoBiblioteca.Models.Devolucao", b =>
+                {
+                    b.HasOne("ProjetoBiblioteca.Models.Livros", "Livro")
+                        .WithMany()
+                        .HasForeignKey("LivroId");
+
+                    b.HasOne("ProjetoBiblioteca.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Livro");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("ProjetoBiblioteca.Models.Emprestimo", b =>

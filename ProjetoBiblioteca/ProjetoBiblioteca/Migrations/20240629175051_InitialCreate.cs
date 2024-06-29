@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetoBiblioteca.Migrations
 {
     /// <inheritdoc />
-    public partial class banco_biblioteca : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,10 +16,10 @@ namespace ProjetoBiblioteca.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Titulo = table.Column<string>(type: "TEXT", nullable: true),
-                    Autor = table.Column<string>(type: "TEXT", nullable: true),
+                    Titulo = table.Column<string>(type: "TEXT", nullable: false),
+                    Autor = table.Column<string>(type: "TEXT", nullable: false),
                     AnoPublicacao = table.Column<int>(type: "INTEGER", nullable: false),
-                    Genero = table.Column<string>(type: "TEXT", nullable: true),
+                    Genero = table.Column<string>(type: "TEXT", nullable: false),
                     ExemplaresDisponiveis = table.Column<int>(type: "INTEGER", nullable: false),
                     CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -42,11 +42,34 @@ namespace ProjetoBiblioteca.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Devolucoes",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    LivroId = table.Column<string>(type: "TEXT", nullable: true),
+                    UsuarioId = table.Column<string>(type: "TEXT", nullable: true),
+                    DataDevolucao = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Devolucoes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Devolucoes_Livros_LivroId",
+                        column: x => x.LivroId,
+                        principalTable: "Livros",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Devolucoes_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Emprestimos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     LivroId = table.Column<string>(type: "TEXT", nullable: false),
                     UsuarioId = table.Column<string>(type: "TEXT", nullable: false),
                     DataEmprestimo = table.Column<DateTime>(type: "TEXT", nullable: false)
@@ -69,6 +92,16 @@ namespace ProjetoBiblioteca.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Devolucoes_LivroId",
+                table: "Devolucoes",
+                column: "LivroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devolucoes_UsuarioId",
+                table: "Devolucoes",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Emprestimos_LivroId",
                 table: "Emprestimos",
                 column: "LivroId");
@@ -82,6 +115,9 @@ namespace ProjetoBiblioteca.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Devolucoes");
+
             migrationBuilder.DropTable(
                 name: "Emprestimos");
 
