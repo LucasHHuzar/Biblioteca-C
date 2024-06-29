@@ -13,11 +13,24 @@ const UsuariosList: React.FC = () => {
   return (
     <div>
       <h1>Lista de Usuários</h1>
-      <ul>
-        {usuarios.map(usuario => (
-          <li key={usuario.id}>{usuario.nome}</li>
-        ))}
-      </ul>
+      <table border={1}>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Emprestimos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuarios.map(usuario => (
+              <tr>
+              <td>{usuario.nome}</td>
+              <td>{usuario.telefone}</td>
+              <td>{usuario.emprestimo}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
