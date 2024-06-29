@@ -9,7 +9,7 @@ const AddLivro = () => {
   const [exemplaresDisponiveis, setExemplaresDisponiveis] = useState('');
   const [error, setError] = useState('');
 
-  const cadastrarLivro = (e : any) => {
+  const handleSubmit = (e : any) => {
     e.preventDefault();
     if (!titulo || !autor || !anoPublicacao || !genero || !exemplaresDisponiveis) {
       setError('Todos os campos são obrigatórios.');
@@ -38,7 +38,7 @@ const AddLivro = () => {
   };
 
   return (
-    <form onSubmit={cadastrarLivro}>
+    <form onSubmit={handleSubmit}>
       <h1>Adicionar Livro</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <label>

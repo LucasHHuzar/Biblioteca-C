@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LivrosListar from './components/LivrosListar';
 import AddLivro from './components/AddLivro';
 import UsuariosList from './components/UsuariosListar';
@@ -13,27 +13,19 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to={"/"}>Home</Link>
+              <Link to={"/"}> Home </Link>
             </li>
             <li>
-              <Link to={"/components/LivrosListar"}>
-                Listar Livros{" "}
-              </Link>
+              <Link to={"/components/LivrosListar"}> Listar Livros{" "} </Link>
             </li>
             <li>
-              <Link to={"/components/AddLivro"}>
-                Cadastrar Livros{" "}
-              </Link>
+              <Link to={"/components/AddLivro"}> Cadastrar Livros{" "} </Link>
             </li>
             <li>
-              <Link to={"/components/AddLivro"}>
-                Listar Usuários{" "}
-              </Link>
+              <Link to={"/components/UsuariosListar"}> Listar Usuários{" "} </Link>
             </li>
             <li>
-              <Link to={"/components/AddUsuario"}>
-                Cadastrar Usuários{" "}
-              </Link>
+              <Link to={"/components/AddUsuario"}> Cadastrar Usuários{" "} </Link>
             </li>
             
           </ul>
@@ -50,8 +42,6 @@ function App() {
           <Route path="/components/UsuariosListar" element={<UsuariosList />} />
 
           <Route path="/components/AddUsuario" element={<AddUsuario />} />
-
-
 
           {/* <Route path="/pages/produto/alterar/:id" element={<LivrosListar />} /> */}
 

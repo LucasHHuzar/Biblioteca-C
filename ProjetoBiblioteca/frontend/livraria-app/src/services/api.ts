@@ -4,9 +4,9 @@ const api = axios.create({
   baseURL: 'http://localhost:5077/API', // ajuste conforme a porta usada pela sua API
 });
 
-export const getLivros = () => api.get('/livros/listar');
-export const getUsuarios = () => api.get('/usuario/listar');
-export const addLivro = (livro: any) => api.post('/livros/cadastrar', livro);
-export const addUsuario = (usuario: any) => api.post('/usuario/cadastrar', usuario);
+export const getLivros = () => api.get('./components/LivrosListar');
+export const getUsuarios = () => api.get('./components/UsuarioListar');
+export const addLivro = (livro: any) => api.post('./components/AddLivro', livro);
+export const addUsuario = (usuario: any) => api.post('./components/AddUsuario', usuario);
 
 export default api;
