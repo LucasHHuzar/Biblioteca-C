@@ -4,20 +4,22 @@ import { addUsuario } from '../services/api';
 const AddUsuario = () => {
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [email, setEmail] = useState('');
 
-  const handleSubmit = (e: any) => {
+  const cadastrarUsuario = (e: any) => {
     e.preventDefault();
-    const novoUsuario = { nome, telefone };
+    const novoUsuario = { nome, telefone, email };
     addUsuario(novoUsuario)
       .then(() => {
         setNome('');
         setTelefone('');
+        setEmail('');
       })
       .catch((error) => console.error('Erro ao adicionar usuário:', error));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={cadastrarUsuario}>
       <h1>Adicionar Usuário</h1>
       <label>
         Nome:
@@ -26,6 +28,10 @@ const AddUsuario = () => {
       <label>
         Telefone:
         <input type="text" value={telefone} onChange={e => setTelefone(e.target.value)} />
+      </label>
+      <label>
+        E-mail:
+        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
       </label>
       <button type="submit">Adicionar Usuário</button>
     </form>

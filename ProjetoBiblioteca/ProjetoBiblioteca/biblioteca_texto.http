@@ -43,14 +43,15 @@ Content-Type: application/json
 
 {
     "Nome" : "Pedro",
-    "Telefone" : "133456789"
+    "Telefone" : "133456789",
+    "Email": "pedro@pedro"
 }
 
 ### Obtenção de todos os usuários
 GET {{base_url}}/usuario/listar
 
 ### Busca de um usuário pelo nome
-GET {{base_url}}/usuario/buscar/João
+GET {{base_url}}/usuario/buscar/Pedro
 
 ### Deleção de um usuário
 DELETE {{base_url}}/usuario/deletar/{id}
@@ -62,8 +63,8 @@ POST {{base_url}}/emprestimo/cadastrar
 Content-Type: application/json
 
 {
-    "LivroId" : "b0655a85-0436-4249-8188-5016c13a3a83",
-    "UsuarioId" : "8427c052-2423-446a-a089-7b664b7e7fa5"
+    "LivroId" : "c7cc7f8f-3762-4fa1-ad66-a77b2ac4d71a",
+    "UsuarioId" : "fd76c041-0802-4116-ba1c-3c0efcde6da2"
 }
 
 ### Obtenção de todos os empréstimos
@@ -83,6 +84,3 @@ Content-Type: application/json
 ### Obtenção de todas as devoluções
 GET {{base_url}}/devolucao/listar
 
-### Obtenção de todas os empréstimos
-
-GET {{base_url}}/emprestimo/listar

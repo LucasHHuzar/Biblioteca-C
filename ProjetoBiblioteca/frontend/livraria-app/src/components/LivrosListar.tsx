@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getLivros } from '../services/api';
+import { Link } from 'react-router-dom';
 
 const LivrosListar: React.FC = () => {
   const [livros, setLivros] = useState<any[]>([]);
@@ -16,19 +17,26 @@ const LivrosListar: React.FC = () => {
       <table border={1}>
         <thead>
           <tr>
-            <th>Id Livro</th>
+            <th>#</th>
             <th>Titulo</th>
             <th>Autor</th>
             <th>Ano de Publicação</th>
+            <th>Exemplares Disponíveis</th>
           </tr>
         </thead>
         <tbody>
           {livros.map(livro => (
-              <tr key={livro.livroId}>
-              <td>{livro.livroId}</td>
+              <tr key={livro.id}>
+              <td>{livro.id}</td>
               <td>{livro.titulo}</td>
               <td>{livro.autor}</td>
               <td>{livro.anoPublicacao}</td>
+              <td>{livro.exemplaresDisponiveis}</td>
+              <td>
+                <Link to={`/components/EmprestimoLivro/${livro.id}`}>
+                  Emprestar
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
