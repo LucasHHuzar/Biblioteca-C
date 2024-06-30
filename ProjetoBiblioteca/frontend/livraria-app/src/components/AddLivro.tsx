@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { addLivro } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const AddLivro = () => {
+  const navigate = useNavigate();
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
   const [anoPublicacao, setAnoPublicacao] = useState('');
@@ -32,6 +34,7 @@ const AddLivro = () => {
         setExemplaresDisponiveis('');
         setError('');
         setMensagem('Livro cadastrado com Sucesso!');
+        navigate('/livros/listar');
       })
       .catch((error) => {
         console.error('Erro ao adicionar livro:', error);

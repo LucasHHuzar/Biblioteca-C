@@ -23,7 +23,7 @@ const LivrosListar: React.FC = () => {
             <th>Autor</th>
             <th>Ano de Publicação</th>
             <th>Exemplares Disponíveis</th>
-            <th>Ação</th>
+            <th>Empréstimo</th>
           </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@ const LivrosListar: React.FC = () => {
               <td>{livro.anoPublicacao}</td>
               <td>{livro.exemplaresDisponiveis}</td>
               <td>
-                <Link to={`/emprestimo-livros/${livro.id}`}>
+                <Link to={`/emprestimo/cadastrar${livro.id}`}>
                   Emprestar
                 </Link>
               </td>

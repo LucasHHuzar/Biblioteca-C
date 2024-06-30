@@ -44,11 +44,8 @@ const EmprestimoLivros: React.FC = () => {
 
     const novoEmprestimo: Emprestimo = { livroId: livro.id, usuarioId };
 
-    console.log('Novo empréstimo:', novoEmprestimo);
-
     addEmprestimo(novoEmprestimo)
       .then(() => {
-        console.log('Empréstimo realizado com sucesso!');
         setLivro(null);
         setUsuarioId('');
         setMensagem('Empréstimo realizado com sucesso!');

@@ -30,11 +30,6 @@ const EmprestimosListar: React.FC = () => {
               <td>{emprestimo.livroId}</td>
               <td>{emprestimo.usuarioId}</td>
               <td>{emprestimo.dataEmprestimo}</td>
-              <td>
-                <Link to={`/components/EmprestimoLivros/${emprestimo.id}`}>
-                  Emprestar
-                </Link>
-              </td>
             </tr>
           ))}
         </tbody>
