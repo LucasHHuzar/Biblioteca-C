@@ -50,7 +50,7 @@ const LivrosListar: React.FC = () => {
             <th>Autor</th>
             <th>Ano de Publicação</th>
             <th>Exemplares Disponíveis</th>
-            <th>Ação</th>
+            <th>Emprestar</th>
             {/* <th>Deletar</th> */}
           </tr>
         </thead>
