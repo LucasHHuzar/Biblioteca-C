@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addUsuario } from '../services/api';
 
-const AddUsuario = () => {
+function AddUsuario() {
+  const {id} = useParams();
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
   const [mensagem, setMensagem] = useState('');
+  const navigate = useNavigate();
 
   const cadastrarUsuario = (e: any) => {
     e.preventDefault();

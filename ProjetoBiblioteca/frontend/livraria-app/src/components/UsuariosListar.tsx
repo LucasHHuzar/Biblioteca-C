@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Usuarios } from '../services/Usuarios';
+import { Link } from 'react-router-dom';
 
 function UsuariosListar() {
   const [usuarios, setUsuarios] = useState<Usuarios[]>([]);
@@ -20,16 +21,6 @@ function carregarUsuarios() {
 function deletar(id: string) {
   fetch(`http://localhost:5077/api/usuario/deletar/${id}`, {
     method: 'DELETE',
-  })
-    .then((resposta)=> resposta.json())
-    .then((dados) => {
-      console.log(dados);
-      carregarUsuarios();
-    });
-}
-function alterar(id: string) {
-  fetch(`http://localhost:5077/api/usuario/alterar/${id}`, {
-    method: 'PUT',
   })
     .then((resposta)=> resposta.json())
     .then((dados) => {
@@ -58,7 +49,7 @@ function alterar(id: string) {
               <td>{usuario.nome}</td>
               <td>{usuario.telefone}</td>
               <td>{usuario.email}</td>
-              <td><button onClick={() =>{alterar(usuario.id!)}}>Alterar</button></td>
+              <td><Link to={`/UsuariosListar/${usuario.id}`}></Link></td>
               <td><button onClick={() =>{deletar(usuario.id!)}}>Deletar</button></td>
             </tr>
           ))}

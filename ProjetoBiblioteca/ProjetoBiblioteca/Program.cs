@@ -209,6 +209,18 @@ app.MapGet("/api/usuario/buscar/{nome}", ([FromRoute] string nome, [FromServices
     return Results.Ok(usuario);
 });
 
+//Buscar Usuário
+//GET: http://localhost:5077/api/usuario/buscar/{id}
+app.MapGet("/api/usuario/buscar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) =>
+{
+    Usuario? usuario = ctx.Usuarios.FirstOrDefault(x => x.Id == id);
+    if (usuario is null)
+    {
+        return Results.NotFound("Usuário não encontrado!");
+    }
+    return Results.Ok(usuario);
+});
+
 //Deletar Livro
 //DELETE: http://localhost:5077/api/livros/deletar/{id}
 app.MapDelete("/api/livros/deletar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) =>
