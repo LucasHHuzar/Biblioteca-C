@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUsuarios } from '../services/api';
 
-const UsuariosListar: React.FC = () => {
+function UsuariosListar() {
   const [usuarios, setUsuarios] = useState<any[]>([]);
 
   useEffect(() => {

@@ -2,43 +2,35 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLivros } from '../services/api';
+import { Livros } from '../services/Livros';
 
-const LivrosListar: React.FC = () => {
-  const [livros, setLivros] = useState<any[]>([]);
+function LivrosListar() {
+  const [livros, setLivros] = useState<Livros[]>([]);
 
   useEffect(() => {
-    getLivros()
-      .then((response: any) => setLivros(response.data))
-      .catch((error: any) => console.error('Erro ao buscar livros:', error));
+    carregarLivros();
   }, []);
 
-// function LivrosListar() {
-//   const [livros, setLivros] = useState<Livros[]>([]);
+  function carregarLivros() {
+    fetch('http://localhost:5077/api/livros/listar')
+      .then((resposta) => resposta.json())
+      .then((livros: Livros[]) => {
+        console.table(livros);
+        setLivros(livros);
 
-//   useEffect(() => {
-//     carregarLivros();
-//   }, []);
+      });
+  }
 
-//   function carregarLivros() {
-//     fetch('http://localhost:5077/api/livros/listar')
-//       .then((resposta) => resposta.json())
-//       .then((livros: Livros[]) => {
-//         console.table(livros);
-//         setLivros(livros);
-
-//       });
-//   }
-
-//   function deletar(id: string) {
-//     fetch(`http://localhost:5077/api/livros/deletar/${id}`, {
-//       method: 'DELETE',
-//   })
-//     .then((resposta)=> resposta.json())
-//     .then((dados) => {
-//       console.log(dados);
-//       carregarLivros();
-//     });
-//   }
+  function deletar(id: string) {
+    fetch(`http://localhost:5077/api/livros/deletar/${id}`, {
+      method: 'DELETE',
+  })
+    .then((resposta)=> resposta.json())
+    .then((dados) => {
+      console.log(dados);
+      carregarLivros();
+    });
+  }
   return (
     <div>
       <h1>Lista de Livros</h1>
@@ -50,8 +42,8 @@ const LivrosListar: React.FC = () => {
             <th>Autor</th>
             <th>Ano de Publicação</th>
             <th>Exemplares Disponíveis</th>
-            <th>Ação</th>
-            {/* <th>Deletar</th> */}
+            <th>Emprstimo</th>
+            <th>Deletar</th>
 
           </tr>
         </thead>
@@ -64,8 +56,8 @@ const LivrosListar: React.FC = () => {
               <td>{livro.anoPublicacao}</td>
               <td>{livro.exemplaresDisponiveis}</td>
 
-              <td><Link to={`/emprestimo-livros/${livro.id}`}>Emprestar</Link></td>
-              {/* <td><button onClick={() =>{deletar(livro.id!)}}>Deletar</button></td> */}
+              <td><Link to={`/components/EmprestimoLivros/${livro.id}`}>Emprestar</Link></td>
+              <td><button onClick={() =>{deletar(livro.id!)}}>Deletar</button></td>
             </tr>
           ))}
         </tbody>
