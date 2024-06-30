@@ -7,6 +7,7 @@ import UsuariosList from './components/UsuariosListar';
 import AddUsuario from './components/AddUsuario';
 import EmprestimoLivros from './components/EmprestimoLivros';
 import { Link } from 'react-router-dom';
+import DevolucaoLivro from './components/DevolucaoLivros';
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
             <li>
               <Link to="/emprestimo-livros">Emprestar Livro</Link>
             </li>
+            <li>
+              <Link to="/devolucao-livro">Devolver Livro</Link>
+            </li>
           </ul>
         </nav>
 
@@ -42,6 +46,7 @@ function App() {
           <Route path="/usuarios/listar" element={<UsuariosList />} />
           <Route path="/usuarios/cadastrar" element={<AddUsuario />} />
           <Route path="/emprestimo-livros/:id" element={<EmprestimoLivros />} />
+          <Route path="/devolucao-livro" element={<DevolucaoLivro />} /> 
         </Routes>
       </BrowserRouter>
     </div>
