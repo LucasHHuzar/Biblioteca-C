@@ -5,6 +5,7 @@ const AddUsuario = () => {
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
+  const [mensagem, setMensagem] = useState('');
 
   const cadastrarUsuario = (e: any) => {
     e.preventDefault();
@@ -14,8 +15,12 @@ const AddUsuario = () => {
         setNome('');
         setTelefone('');
         setEmail('');
+        setMensagem('Usuário cadastrado com Sucesso!')
       })
-      .catch((error) => console.error('Erro ao adicionar usuário:', error));
+      .catch((error) =>{
+        console.error('Erro ao adicionar usuário:', error);
+        setMensagem('Erro ao cadastrar usuário.');
+      });
   };
 
   return (
@@ -26,14 +31,15 @@ const AddUsuario = () => {
         <input type="text" value={nome} onChange={e => setNome(e.target.value)} />
       </label>
       <label>
-        Telefone:
+         Telefone:
         <input type="text" value={telefone} onChange={e => setTelefone(e.target.value)} />
       </label>
       <label>
-        E-mail:
+         E-mail:
         <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
       </label>
       <button type="submit">Adicionar Usuário</button>
+      {mensagem && <p>{mensagem}</p>}
     </form>
   );
 };

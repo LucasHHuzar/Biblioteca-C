@@ -1,28 +1,34 @@
-
 import React, { useEffect, useState } from 'react';
-import { addEmprestimo } from '../services/api'; // Supondo que o método correto seja addEmprestimo
+import { addEmprestimo } from '../services/api';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Emprestimos } from '../services/Emprestimos';
+
+interface Livro {
+  id: string;
+  titulo: string;
+  autor: string;
+  anoPublicacao: number;
+  exemplaresDisponiveis: number;
+}
 
 interface Emprestimo {
   livroId: string;
   usuarioId: string;
 }
 
-function EmprestimoLivros() {
+const EmprestimoLivros: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   
-  const [livroId, setLivroId] = useState(id || '');
-  const [usuarioId, setUsuarioId] = useState('');
+  const [livro, setLivro] = useState<any>(null); // Estado para armazenar os detalhes do livro
+  const [usuarioId, setUsuarioId] = useState<string>('');
+  const [mensagem, setMensagem] = useState<string>('');
 
   useEffect(() => {
     if (id) {
       fetch(`http://localhost:5077/api/livros/buscar/${id}`)
         .then((resposta) => resposta.json())
-        .then((emprestimo: Emprestimo) => {
-          setLivroId(emprestimo.livroId);
-          setUsuarioId(emprestimo.usuarioId);
+        .then((livro) => {
+          setLivro(livro); // Atualiza o estado do livro com os detalhes buscados
         })
         .catch((error) => console.error('Erro ao buscar livro:', error));
     }
@@ -31,13 +37,25 @@ function EmprestimoLivros() {
   const emprestimoLivro = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const novoEmprestimo: any = { livroId, usuarioId };
+    if (!livro) {
+      console.error('Nenhum livro carregado.');
+      return;
+    }
+
+    const novoEmprestimo: Emprestimo = { livroId: livro.id, usuarioId };
+
+    console.log('Novo empréstimo:', novoEmprestimo);
 
     addEmprestimo(novoEmprestimo)
       .then(() => {
-        setLivroId('');
+        console.log('Empréstimo realizado com sucesso!');
+        setLivro(null);
         setUsuarioId('');
-        navigate('/components/EmprestimoLivro'); // Ajuste o caminho para onde você deseja navegar
+        setMensagem('Empréstimo realizado com sucesso!');
+        setTimeout(() => {
+          setLivro(null); // Limpa o estado do livro após emprestar
+          navigate('/EmprestimoLivro'); // Navega para o caminho correto
+        }, 2000);
       })
       .catch((error) => console.error('Erro ao adicionar empréstimo:', error));
   };
@@ -45,15 +63,23 @@ function EmprestimoLivros() {
   return (
     <form onSubmit={emprestimoLivro}>
       <h1>Adicionar Empréstimo</h1>
-      <label>
-        Id Livro:
-        <input type="text" value={livroId} readOnly />
-      </label>
+      {livro ? (
+        <>
+          <p>Detalhes do Livro:</p>
+          <p>Título: {livro.titulo}</p>
+          <p>Autor: {livro.autor}</p>
+          <p>Ano de Publicação: {livro.anoPublicacao}</p>
+          <p>Exemplares Disponíveis: {livro.exemplaresDisponiveis}</p>
+        </>
+      ) : (
+        <p>Carregando informações do livro...</p>
+      )}
       <label>
         Id Usuario:
         <input type="text" value={usuarioId} onChange={e => setUsuarioId(e.target.value)} />
       </label>
       <button type="submit">Emprestar</button>
+      {mensagem && <p>{mensagem}</p>}
     </form>
   );
 };
