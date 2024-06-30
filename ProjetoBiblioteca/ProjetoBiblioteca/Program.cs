@@ -127,7 +127,15 @@ app.MapPost("/api/emprestimo/cadastrar/{id}", ([FromBody] Emprestimo emprestimo,
         return Results.BadRequest("Livro não encontrado.");
     }
     
+    if(livro.ExemplaresDisponiveis <= 0){
+        return Results.BadRequest("Não há exemplares disponíveis deste livro.");
+    }
+
     ctx.Emprestimos.Add(emprestimo);
+    ctx.SaveChanges();
+
+    livro.ExemplaresDisponiveis--;
+    ctx.Livros.Update(livro);
     ctx.SaveChanges();
 
     return Results.Ok("Empréstimo realizado!");

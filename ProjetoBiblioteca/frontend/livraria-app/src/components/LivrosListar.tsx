@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLivros } from '../services/api';
-import { Livros } from '../services/Livros';
 
 const LivrosListar: React.FC = () => {
   const [livros, setLivros] = useState<any[]>([]);

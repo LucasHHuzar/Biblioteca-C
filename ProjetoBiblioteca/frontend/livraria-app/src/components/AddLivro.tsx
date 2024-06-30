@@ -8,6 +8,7 @@ const AddLivro = () => {
   const [genero, setGenero] = useState('');
   const [exemplaresDisponiveis, setExemplaresDisponiveis] = useState('');
   const [error, setError] = useState('');
+  const [mensagem, setMensagem] = useState('');
 
   const cadastrarLivro = (e : any) => {
     e.preventDefault();
@@ -30,10 +31,13 @@ const AddLivro = () => {
         setGenero('');
         setExemplaresDisponiveis('');
         setError('');
+        setMensagem('Livro cadastrado com Sucesso!');
       })
       .catch((error) => {
         console.error('Erro ao adicionar livro:', error);
         setError('Erro ao adicionar livro. Tente novamente mais tarde.');
+        setMensagem('');
+        
       });
   };
 
@@ -62,6 +66,7 @@ const AddLivro = () => {
         <input type="number" value={exemplaresDisponiveis} onChange={e => setExemplaresDisponiveis(e.target.value)} />
       </label>
       <button type="submit">Adicionar Livro</button>
+      {mensagem && <p style={{color: 'green'}}>{mensagem}</p>}
     </form>
   );
 };

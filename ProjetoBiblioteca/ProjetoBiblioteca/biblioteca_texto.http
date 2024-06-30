@@ -59,12 +59,12 @@ DELETE {{base_url}}/usuario/deletar/{id}
 # EMPRESTIMO #####################################
 
 ### Criação de um novo empréstimo
-POST {{base_url}}/emprestimo/cadastrar/43a74312-bbf0-4b6e-980d-10b3d4be2a90
+POST {{base_url}}/emprestimo/cadastrar/0106fad7-3e7d-4e9b-aa95-05942d027559	
 Content-Type: application/json
 
 {
-    "LivroId" : "43a74312-bbf0-4b6e-980d-10b3d4be2a90",
-    "UsuarioId" : "a37f58e8-9ddb-4b50-b396-9ac6b70a1baf"
+    "LivroId" : "0106fad7-3e7d-4e9b-aa95-05942d027559",
+    "UsuarioId" : "a95d9341-a981-4fa5-b935-a79d79a0c209"
 }
 
 ### Obtenção de todos os empréstimos
