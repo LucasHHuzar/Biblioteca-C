@@ -21,12 +21,12 @@ GET {{base_url}}/livros/listar
 GET {{base_url}}/livros/buscar/43a74312-bbf0-4b6e-980d-10b3d4be2a90
 
 ### Atualização de um livro
-PUT {{base_url}}/livros/alterar/{id}
+PUT {{base_url}}/livros/alterar/d946bf27-3d01-42db-9d84-d23446461f71
 Content-Type: application/json
 
 {
     "Titulo" : "Prova de fogo - Edição Revisada",
-    "Autor" : "matus",
+    "Autor" : "matheus",
     "AnoPublicacao" : 2010,
     "Genero" : "romance",
     "ExemplaresDisponiveis" : 3
@@ -84,3 +84,12 @@ Content-Type: application/json
 ### Obtenção de todas as devoluções
 GET {{base_url}}/devolucao/listar
 
+### Alterar usuario
+PUT {{base_url}}/usuario/alterar/1e89757e-9c64-472d-89dc-a695c76b1d43
+Content-Type: application/json
+
+{
+    "Nome" : "Pedro",
+    "Telefone" : "133456789",
+    "Email": "pedro@pedro"
+}

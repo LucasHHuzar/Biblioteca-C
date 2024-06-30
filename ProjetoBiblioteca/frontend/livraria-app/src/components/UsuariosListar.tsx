@@ -1,15 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { getUsuarios } from '../services/api';
+import { useEffect, useState } from 'react';
+import { Usuarios } from '../services/Usuarios';
 
 function UsuariosListar() {
-  const [usuarios, setUsuarios] = useState<any[]>([]);
+  const [usuarios, setUsuarios] = useState<Usuarios[]>([]);
 
   useEffect(() => {
-    getUsuarios()
-      .then((response: any) => setUsuarios(response.data))
-      .catch((error: any) => console.error('Erro ao buscar usuários:', error));
+    carregarUsuarios();
   }, []);
 
+function carregarUsuarios() {
+  fetch('http://localhost:5077/api/usuario/listar')
+    .then((resposta) => resposta.json())
+    .then((usuarios: Usuarios[]) => {
+      console.table(usuarios);
+      setUsuarios(usuarios);
+    });
+}
+
+function deletar(id: string) {
+  fetch(`http://localhost:5077/api/usuario/deletar/${id}`, {
+    method: 'DELETE',
+  })
+    .then((resposta)=> resposta.json())
+    .then((dados) => {
+      console.log(dados);
+      carregarUsuarios();
+    });
+}
+function alterar(id: string) {
+  fetch(`http://localhost:5077/api/usuario/alterar/${id}`, {
+    method: 'PUT',
+  })
+    .then((resposta)=> resposta.json())
+    .then((dados) => {
+      console.log(dados);
+      carregarUsuarios();
+    });
+}
   return (
     <div>
       <h1>Lista de Usuários</h1>
@@ -20,8 +47,8 @@ function UsuariosListar() {
             <th>Nome</th>
             <th>Telefone</th>
             <th>E-mail</th>
-            <th>Emprestimos</th>
-            {/* <th>Deletar</th> */}
+            <th>Alterar</th>
+            <th>Deletar</th>
           </tr>
         </thead>
         <tbody>
@@ -31,8 +58,8 @@ function UsuariosListar() {
               <td>{usuario.nome}</td>
               <td>{usuario.telefone}</td>
               <td>{usuario.email}</td>
-              <td>{usuario.emprestimo}</td>
-              {/* <td>{usuario.deletar}</td> */}
+              <td><button onClick={() =>{alterar(usuario.id!)}}>Alterar</button></td>
+              <td><button onClick={() =>{deletar(usuario.id!)}}>Deletar</button></td>
             </tr>
           ))}
         </tbody>

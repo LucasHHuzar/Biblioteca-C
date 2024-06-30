@@ -105,6 +105,30 @@ app.MapPut("/api/livros/alterar/{id}", ([FromRoute] string id, [FromBody] Livros
     return Results.Ok(livrosBuscado);
 });
 
+//Alterar usuario
+//PUT: http://localhost:5077/api/usuario/alterar/{id}
+app.MapPut("/api/usuario/alterar/{id}", ([FromRoute] string id, [FromBody] Usuario usuario, [FromServices] AppDataContext ctx) =>
+{
+    List<ValidationResult> erros = new List<ValidationResult>();
+    if (!Validator.TryValidateObject(usuario, new ValidationContext(usuario), erros, true))
+    {
+        return Results.BadRequest(erros);
+    }
+
+    Usuario? usuarioBuscado = ctx.Usuarios.Find(id);
+    if (usuarioBuscado is null)
+    {
+        return Results.NotFound("Usuário não encontrado");
+    }
+
+    usuarioBuscado.Nome = usuario.Nome;
+    usuarioBuscado.Email = usuario.Email;
+    usuarioBuscado.Telefone = usuario.Telefone;
+    
+    ctx.SaveChanges();
+    return Results.Ok(usuarioBuscado);
+});
+
 //Cadastrar Empréstimo
 //POST: http://localhost:5077/api/emprestimo/cadastrar
 app.MapPost("/api/emprestimo/cadastrar/{id}", ([FromBody] Emprestimo emprestimo, [FromRoute] string id, [FromServices] AppDataContext ctx) =>
