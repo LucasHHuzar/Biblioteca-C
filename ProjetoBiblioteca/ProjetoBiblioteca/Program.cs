@@ -131,7 +131,7 @@ app.MapPut("/api/usuario/alterar/{id}", ([FromRoute] string id, [FromBody] Usuar
 
 //Cadastrar Empréstimo
 //POST: http://localhost:5077/api/emprestimo/cadastrar
-app.MapPost("/api/emprestimo/cadastrar/{id}", ([FromBody] Emprestimo emprestimo, [FromRoute] string id, [FromServices] AppDataContext ctx) =>
+app.MapPost("/api/emprestimo/cadastrar", ([FromBody] Emprestimo emprestimo, [FromServices] AppDataContext ctx) =>
 {
     List<ValidationResult> erros = new List<ValidationResult>();
     if (!Validator.TryValidateObject(emprestimo, new ValidationContext(emprestimo), erros, true))

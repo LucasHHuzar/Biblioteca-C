@@ -19,6 +19,7 @@ const EmprestimoLivros: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [livro, setLivro] = useState<any>(); // Estado para armazenar os detalhes do livro
+  const [livroId, setLivroId] = useState<string>('');
   const [usuarioId, setUsuarioId] = useState<string>('');
   const [mensagem, setMensagem] = useState<string>('');
 
@@ -46,12 +47,12 @@ const EmprestimoLivros: React.FC = () => {
 
     addEmprestimo(novoEmprestimo)
       .then(() => {
-        setLivro(null);
+        setLivro('');
         setUsuarioId('');
         setMensagem('Empréstimo realizado com sucesso!');
         setTimeout(() => {
           setLivro(null); // Limpa o estado do livro após emprestar
-          navigate('/EmprestimoListar'); // Navega para o caminho correto
+          navigate('/emprestimo/listar'); // Navega para o caminho correto
         }, 2000);
       })
       .catch((error) => console.error('Erro ao adicionar empréstimo:', error));
@@ -60,6 +61,10 @@ const EmprestimoLivros: React.FC = () => {
   return (
     <form onSubmit={emprestimoLivro}>
       <h1>Adicionar Empréstimo</h1>
+      <label>
+        Id Livro:
+        <input type="text" value={id} onChange={e => setLivroId(e.target.value)} />
+      </label>
       {livro ? (
         <>
           <p>Detalhes do Livro:</p>

@@ -21,19 +21,19 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/livros/listar">Listar Livros</Link>
+              <Link to="/livros/listar">Lista de Livros</Link>
             </li>
             <li>
               <Link to="/livros/cadastrar">Cadastrar Livros</Link>
             </li>
             <li>
-              <Link to="/usuarios/listar">Listar Usuários</Link>
+              <Link to="/usuarios/listar">Lista de Usuários</Link>
             </li>
             <li>
               <Link to="/usuarios/cadastrar">Cadastrar Usuários</Link>
             </li>
             <li>
-              <Link to="/emprestimo/listar">Listar Empréstimos</Link>
+              <Link to="/emprestimo/listar">Lista de Empréstimos</Link>
             </li>
             <li>
               <Link to="/devolucao-livro">Devolver Livro</Link>
