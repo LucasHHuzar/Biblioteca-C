@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5077/api', // ajuste conforme a porta usada pela sua API
+  baseURL: 'http://localhost:5077/api',
 });
 
 export const getLivros = () => api.get('/livros/listar');

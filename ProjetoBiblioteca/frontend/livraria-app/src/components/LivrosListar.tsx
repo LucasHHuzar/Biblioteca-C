@@ -1,7 +1,7 @@
 // LivrosListar.tsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getLivros } from '../services/api'; // Ajuste o caminho conforme necessário
+import { getLivros } from '../services/api';
 
 const LivrosListar: React.FC = () => {
   const [livros, setLivros] = useState<any[]>([]);

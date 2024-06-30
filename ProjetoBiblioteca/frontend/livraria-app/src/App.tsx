@@ -46,7 +46,7 @@ function App() {
           <Route path="/usuarios/listar" element={<UsuariosList />} />
           <Route path="/usuarios/cadastrar" element={<AddUsuario />} />
           <Route path="/emprestimo-livros/:id" element={<EmprestimoLivros />} />
-          <Route path="/devolucao-livro" element={<DevolucaoLivro />} /> 
+          <Route path="/devolucao-livro" element={<DevolucaoLivro />} />
         </Routes>
       </BrowserRouter>
     </div>
