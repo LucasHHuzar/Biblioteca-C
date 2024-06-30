@@ -6,32 +6,34 @@ import { Emprestimos } from '../services/Emprestimos';
 
 function EmprestimoLivros() {
   const navigate = useNavigate();
-  const { titulo } = useParams();
+  const { id } = useParams();
   
   const [livroId, setLivroId] = useState('');
   const [usuarioId, setUsuarioId] = useState('');
 
   useEffect(() => {
-    if (titulo) {
-      fetch(`http://localhost:5077/api/livros/buscar/${titulo}`)
+    if (id) {
+      fetch(`http://localhost:5077/api/livros/buscar/${id}`)
         .then((resposta) => resposta.json())
         .then((emprestimo: Emprestimos) => {
           setLivroId(emprestimo.livroId);
           setUsuarioId(emprestimo.usuarioId);
+          navigate('./components/EmprestimoLivros');
         })
         .catch((error) => console.error('Erro ao buscar livro:', error));
     }
-  }, [titulo]);
+  }, [id]);
 
   const emprestimoLivro = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const novoEmprestimo = { livroId, usuarioId };
 
     addEmprestimo(novoEmprestimo)
       .then(() => {
         setLivroId('');
         setUsuarioId('');
-        navigate('/caminho-para-onde-ir-apos-emprestimo'); // Defina o caminho para onde navegar após o empréstimo
+        navigate('./components/LivrosListar');
       })
       .catch((error: any) => console.error('Erro ao adicionar empréstimo:', error));
   };

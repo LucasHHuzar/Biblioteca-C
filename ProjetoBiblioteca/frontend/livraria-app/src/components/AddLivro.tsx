@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { addLivro } from '../services/api';
-import { getNextId } from '../services/idServices';
 
 const AddLivro = () => {
   const [titulo, setTitulo] = useState('');

@@ -11,7 +11,7 @@ using ProjetoBiblioteca.Models;
 namespace ProjetoBiblioteca.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20240629220048_banco_biblioteca")]
+    [Migration("20240630023428_banco_biblioteca")]
     partial class banco_biblioteca
     {
         /// <inheritdoc />

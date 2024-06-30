@@ -17,7 +17,7 @@ const LivrosListar: React.FC = () => {
       <table border={1}>
         <thead>
           <tr>
-            <th>#</th>
+            <th>Id do Livro</th>
             <th>Titulo</th>
             <th>Autor</th>
             <th>Ano de Publicação</th>
@@ -33,7 +33,7 @@ const LivrosListar: React.FC = () => {
               <td>{livro.anoPublicacao}</td>
               <td>{livro.exemplaresDisponiveis}</td>
               <td>
-                <Link to={`/components/EmprestimoLivro/${livro.id}`}>
+                <Link to={`/components/EmprestimoLivros/${livro.id}`}>
                   Emprestar
                 </Link>
               </td>

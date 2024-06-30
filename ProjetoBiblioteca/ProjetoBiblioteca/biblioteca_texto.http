@@ -18,7 +18,7 @@ Content-Type: application/json
 GET {{base_url}}/livros/listar
 
 ### Busca de um livro pelo título
-GET {{base_url}}/livros/buscar/Prova de fogo
+GET {{base_url}}/livros/buscar/43a74312-bbf0-4b6e-980d-10b3d4be2a90
 
 ### Atualização de um livro
 PUT {{base_url}}/livros/alterar/{id}
@@ -59,12 +59,12 @@ DELETE {{base_url}}/usuario/deletar/{id}
 # EMPRESTIMO #####################################
 
 ### Criação de um novo empréstimo
-POST {{base_url}}/emprestimo/cadastrar
+POST {{base_url}}/emprestimo/cadastrar/43a74312-bbf0-4b6e-980d-10b3d4be2a90
 Content-Type: application/json
 
 {
-    "LivroId" : "c7cc7f8f-3762-4fa1-ad66-a77b2ac4d71a",
-    "UsuarioId" : "fd76c041-0802-4116-ba1c-3c0efcde6da2"
+    "LivroId" : "43a74312-bbf0-4b6e-980d-10b3d4be2a90",
+    "UsuarioId" : "a37f58e8-9ddb-4b50-b396-9ac6b70a1baf"
 }
 
 ### Obtenção de todos os empréstimos
@@ -77,8 +77,8 @@ POST {{base_url}}/devolucao/cadastrar
 Content-Type: application/json
 
 {
-    "LivroId" : "b0655a85-0436-4249-8188-5016c13a3a83",
-    "UsuarioId" : "8427c052-2423-446a-a089-7b664b7e7fa5"
+    "LivroId" : "43a74312-bbf0-4b6e-980d-10b3d4be2a90",
+    "UsuarioId" : "a37f58e8-9ddb-4b50-b396-9ac6b70a1baf"
 }
 
 ### Obtenção de todas as devoluções

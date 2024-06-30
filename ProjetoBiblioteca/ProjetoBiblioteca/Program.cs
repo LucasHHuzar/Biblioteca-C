@@ -48,9 +48,9 @@ app.MapGet("/api/livros/listar", ([FromServices] AppDataContext ctx) =>
 
 //Buscar
 //GET: http://localhost:5077/api/livros/buscar/{titulo}
-app.MapGet("/api/livros/buscar/{titulo}", ([FromRoute] string titulo, [FromServices] AppDataContext ctx) =>
+app.MapGet("/api/livros/buscar/{id}", ([FromRoute] string id, [FromServices] AppDataContext ctx) =>
 {
-    Livros? livros = ctx.Livros.FirstOrDefault(x => x.Titulo == titulo);
+    Livros? livros = ctx.Livros.FirstOrDefault(x => x.Id == id);
     if (livros is null)
     {
         return Results.NotFound("Livro não encontrado!");
@@ -107,7 +107,7 @@ app.MapPut("/api/livros/alterar/{id}", ([FromRoute] string id, [FromBody] Livros
 
 //Cadastrar Empréstimo
 //POST: http://localhost:5077/api/emprestimo/cadastrar
-app.MapPost("/api/emprestimo/cadastrar", ([FromBody] Emprestimo emprestimo, [FromServices] AppDataContext ctx) =>
+app.MapPost("/api/emprestimo/cadastrar/{id}", ([FromBody] Emprestimo emprestimo, [FromRoute] string id, [FromServices] AppDataContext ctx) =>
 {
     List<ValidationResult> erros = new List<ValidationResult>();
     if (!Validator.TryValidateObject(emprestimo, new ValidationContext(emprestimo), erros, true))
@@ -256,8 +256,6 @@ app.MapGet("/api/emprestimo/listar", ([FromServices] AppDataContext ctx) =>
     }
     return Results.NotFound("Tabela vazia!");
 });
-
-
 
 app.UseCors("Acesso Total");
 

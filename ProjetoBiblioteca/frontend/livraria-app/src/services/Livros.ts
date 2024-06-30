@@ -9,5 +9,5 @@ export interface Livros {
     exemplaresDisponiveis: number;
     criadoEm?: string;
     emprestimo?: Emprestimos;
-  }
+}
   
