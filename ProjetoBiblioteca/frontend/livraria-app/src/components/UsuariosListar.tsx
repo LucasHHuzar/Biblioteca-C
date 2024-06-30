@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUsuarios } from '../services/api';
 
-const UsuariosList: React.FC = () => {
+function UsuariosListar() {
   const [usuarios, setUsuarios] = useState<any[]>([]);
 
   useEffect(() => {
@@ -41,5 +41,5 @@ const UsuariosList: React.FC = () => {
   );
 };
 
-export default UsuariosList;
+export default UsuariosListar;
 
