@@ -21,6 +21,7 @@ const UsuariosList: React.FC = () => {
             <th>Telefone</th>
             <th>E-mail</th>
             <th>Emprestimos</th>
+            {/* <th>Deletar</th> */}
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@ const UsuariosList: React.FC = () => {
               <td>{usuario.telefone}</td>
               <td>{usuario.email}</td>
               <td>{usuario.emprestimo}</td>
+              {/* <td>{usuario.deletar}</td> */}
             </tr>
           ))}
         </tbody>
