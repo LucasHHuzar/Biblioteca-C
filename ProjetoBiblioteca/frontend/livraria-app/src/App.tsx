@@ -49,6 +49,8 @@ function App() {
           <Route path="/usuarios/cadastrar" element={<AddUsuario />} />
           <Route path="/emprestimo/listar" element={<EmprestimosListar />} />
           <Route path="/devolucao/listar" element={<DevolucaoLivro />} /> 
+          <Route path="/emprestimo-livros/:livroId" element={<EmprestimoLivros />} /> 
+
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,6 +5,7 @@ import { devolverLivro } from '../services/api'; // Importe a função devolverL
 function DevolucaoLivro() {
   const navigate = useNavigate();
   const [livroId, setLivroId] = useState('');
+  const [error, setError] = useState('')
 
   const livroDevolucao = () => {
     devolverLivro(livroId)
