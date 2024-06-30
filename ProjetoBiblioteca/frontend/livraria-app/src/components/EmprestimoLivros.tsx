@@ -18,8 +18,7 @@ interface Emprestimo {
 const EmprestimoLivros: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  
-  const [livro, setLivro] = useState<any>(null); // Estado para armazenar os detalhes do livro
+  const [livro, setLivro] = useState<any>(); // Estado para armazenar os detalhes do livro
   const [usuarioId, setUsuarioId] = useState<string>('');
   const [mensagem, setMensagem] = useState<string>('');
 
@@ -28,6 +27,7 @@ const EmprestimoLivros: React.FC = () => {
       fetch(`http://localhost:5077/api/livros/buscar/${id}`)
         .then((resposta) => resposta.json())
         .then((livro) => {
+          console.log(livro);
           setLivro(livro); // Atualiza o estado do livro com os detalhes buscados
         })
         .catch((error) => console.error('Erro ao buscar livro:', error));

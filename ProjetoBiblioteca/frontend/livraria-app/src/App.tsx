@@ -48,8 +48,8 @@ function App() {
           <Route path="/usuarios/listar" element={<UsuariosListar />} />
           <Route path="/usuarios/cadastrar" element={<AddUsuario />} />
           <Route path="/emprestimo/listar" element={<EmprestimosListar />} />
+          <Route path="/emprestimo/cadastrar/:id" element={<EmprestimoLivros />} /> 
           <Route path="/devolucao/listar" element={<DevolucaoLivro />} /> 
-          <Route path="/emprestimo-livros/:livroId" element={<EmprestimoLivros />} /> 
 
         </Routes>
       </BrowserRouter>
