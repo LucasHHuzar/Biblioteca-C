@@ -1,6 +1,7 @@
+// LivrosListar.tsx
 import React, { useEffect, useState } from 'react';
-import { getLivros } from '../services/api';
 import { Link } from 'react-router-dom';
+import { getLivros } from '../services/api'; // Ajuste o caminho conforme necessário
 
 const LivrosListar: React.FC = () => {
   const [livros, setLivros] = useState<any[]>([]);
@@ -18,22 +19,23 @@ const LivrosListar: React.FC = () => {
         <thead>
           <tr>
             <th>Id do Livro</th>
-            <th>Titulo</th>
+            <th>Título</th>
             <th>Autor</th>
             <th>Ano de Publicação</th>
             <th>Exemplares Disponíveis</th>
+            <th>Ação</th>
           </tr>
         </thead>
         <tbody>
           {livros.map(livro => (
-              <tr key={livro.id}>
+            <tr key={livro.id}>
               <td>{livro.id}</td>
               <td>{livro.titulo}</td>
               <td>{livro.autor}</td>
               <td>{livro.anoPublicacao}</td>
               <td>{livro.exemplaresDisponiveis}</td>
               <td>
-                <Link to={`/components/EmprestimoLivros/${livro.id}`}>
+                <Link to={`/emprestimo-livros/${livro.id}`}>
                   Emprestar
                 </Link>
               </td>
