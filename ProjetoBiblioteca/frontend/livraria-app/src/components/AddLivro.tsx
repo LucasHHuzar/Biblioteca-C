@@ -12,7 +12,7 @@ const AddLivro = () => {
   const [error, setError] = useState('');
   const [mensagem, setMensagem] = useState('');
 
-  const cadastrarLivro = (e : any) => {
+  const cadastrarLivro = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!titulo || !autor || !anoPublicacao || !genero || !exemplaresDisponiveis) {
       setError('Todos os campos são obrigatórios.');
@@ -34,13 +34,15 @@ const AddLivro = () => {
         setExemplaresDisponiveis('');
         setError('');
         setMensagem('Livro cadastrado com Sucesso!');
+        setTimeout(() => {
+          setMensagem('');
+        }, 3000); // Limpa a mensagem após 3 segundos
         navigate('/livros/listar');
       })
       .catch((error) => {
         console.error('Erro ao adicionar livro:', error);
         setError('Erro ao adicionar livro. Tente novamente mais tarde.');
         setMensagem('');
-        
       });
   };
 
@@ -69,7 +71,7 @@ const AddLivro = () => {
         <input type="number" value={exemplaresDisponiveis} onChange={e => setExemplaresDisponiveis(e.target.value)} />
       </label>
       <button type="submit">Adicionar Livro</button>
-      {mensagem && <p style={{color: 'green'}}>{mensagem}</p>}
+      {mensagem && <p style={{ color: 'green' }}>{mensagem}</p>}
     </form>
   );
 };
