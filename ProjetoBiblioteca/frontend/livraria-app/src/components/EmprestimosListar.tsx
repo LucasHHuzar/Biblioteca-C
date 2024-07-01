@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { emprestimosListar } from '../services/api';
 import { Link } from 'react-router-dom';
+import { Emprestimos } from '../services/Emprestimos';
 
 const EmprestimosListar: React.FC = () => {
-  const [emprestimos, setEmprestimos] = useState<any[]>([]);
+  const [emprestimos, setEmprestimos] = useState<Emprestimos[]>([]);
 
   useEffect(() => {
     emprestimosListar()
@@ -21,16 +22,17 @@ const EmprestimosListar: React.FC = () => {
             <th>Id do Livro</th>
             <th>Id do Usuário</th>
             <th>Data de Emprestimo</th>
+            <th>Devolução</th>
           </tr>
         </thead>
         <tbody>
           {emprestimos.map(emprestimo => (
-              <tr key={emprestimo.id}>
+              <tr key={emprestimo.usuarioId}>
               <td>{emprestimo.id}</td>
               <td>{emprestimo.livroId}</td>
               <td>{emprestimo.usuarioId}</td>
               <td>{emprestimo.dataEmprestimo}</td>
-              <td><Link to={`/devolucao/cadastrar`}>Devolver Livro</Link></td>
+              <td><Link to={`/devolucao/cadastrar/${emprestimo.usuarioId}`}>Devolver Livro</Link></td>
             </tr>
           ))}
         </tbody>

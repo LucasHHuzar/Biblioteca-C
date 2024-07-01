@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LivrosListar from './components/LivrosListar';
 import AddLivro from './components/AddLivro';
-import UsuariosList from './components/UsuariosListar';
 import AddUsuario from './components/AddUsuario';
 import EmprestimoLivros from './components/EmprestimoLivros';
 import { Link } from 'react-router-dom';
@@ -11,6 +10,7 @@ import EmprestimosListar from './components/EmprestimosListar';
 import UsuariosListar from './components/UsuariosListar';
 import UsuarioAlterar from './components/UsuariosAlterar';
 import DevolucaoLivros from './components/DevolucaoLivros';
+import DevolucaoListar from './components/DevolucaoListar';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
               <Link to="/emprestimo/listar">Lista de Empréstimos</Link>
             </li>
             <li>
-              <Link to="/devolucao-livro">Devolver Livro</Link>
+              <Link to="/devolucao/listar">Lista de Devoluções</Link>
             </li>
           </ul>
         </nav>
@@ -55,9 +55,11 @@ function App() {
 
           <Route path="/emprestimo/listar" element={<EmprestimosListar />} />
 
+          <Route path="/devolucao/listar" element={<DevolucaoListar />} />
+
           <Route path="/emprestimo/cadastrar/:id" element={<EmprestimoLivros />} /> 
 
-          <Route path="/devolucao/cadastrar" element={<DevolucaoLivros />} /> 
+          <Route path="/devolucao/cadastrar/:id" element={<DevolucaoLivros />} /> 
 
           <Route path="/usuario/alterar/:id" element={<UsuarioAlterar />} /> 
 

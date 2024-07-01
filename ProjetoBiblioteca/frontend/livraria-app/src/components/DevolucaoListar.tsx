@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { getDevolucoes } from '../services/api';
+import { devolucaoListar } from '../services/api';
+import { Devolucao } from '../services/Devolucao';
 
-function ListarDevolucoes() {
-  const [devolucoes, setDevolucoes] = useState<any[]>([]);
+const DevolucaoListar: React.FC = () => {
+  const [devolucao, setDevolucao] = useState<Devolucao[]>([]);
 
   useEffect(() => {
-    getDevolucoes()
-      .then((response) => {
-        setDevolucoes(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar devoluções:', error);
-      });
+    devolucaoListar()
+      .then((response: any) => setDevolucao(response.data))
+      .catch((error: any) => console.error('Erro ao buscar devoluções:', error));
   }, []);
 
   return (
     <div>
       <h1>Lista de Devoluções</h1>
-      <table>
+      <table border={1}>
         <thead>
           <tr>
+            <th>Id da Devolução</th>
             <th>Id do Livro</th>
             <th>Id do Usuário</th>
-            <th>Data da Devolução</th>
+            <th>Data de Devolução</th>
           </tr>
         </thead>
         <tbody>
-          {devolucoes.map((devolucao) => (
-            <tr key={devolucao.id}>
+          {devolucao.map(devolucao => (
+              <tr key={devolucao.usuarioId}>
+              <td>{devolucao.id}</td>
               <td>{devolucao.livroId}</td>
               <td>{devolucao.usuarioId}</td>
               <td>{devolucao.dataDevolucao}</td>
@@ -37,6 +36,6 @@ function ListarDevolucoes() {
       </table>
     </div>
   );
-}
+};
 
-export default ListarDevolucoes;
+export default DevolucaoListar;

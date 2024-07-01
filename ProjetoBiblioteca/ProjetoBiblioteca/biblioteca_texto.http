@@ -18,7 +18,7 @@ Content-Type: application/json
 GET {{base_url}}/livros/listar
 
 ### Busca de um livro pelo título
-GET {{base_url}}/livros/buscar/43a74312-bbf0-4b6e-980d-10b3d4be2a90
+GET {{base_url}}/livros/buscar/Elon Musk
 
 ### Atualização de um livro
 PUT {{base_url}}/livros/alterar/d946bf27-3d01-42db-9d84-d23446461f71

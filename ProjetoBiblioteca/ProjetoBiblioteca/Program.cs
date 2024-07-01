@@ -273,9 +273,11 @@ app.MapPost("/api/devolucao/cadastrar", ([FromBody] Devolucao devolucao, [FromSe
         return Results.BadRequest("Livro não encontrado.");
     }
 
-    livro.ExemplaresDisponiveis++;
-
     ctx.Devolucoes.Add(devolucao);
+    ctx.SaveChanges();
+    
+    livro.ExemplaresDisponiveis++;
+    ctx.Livros.Update(livro);
     ctx.SaveChanges();
 
     return Results.Ok("Devolução realizada!");
