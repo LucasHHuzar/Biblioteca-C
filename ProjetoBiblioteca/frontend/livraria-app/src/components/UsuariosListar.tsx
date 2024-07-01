@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Usuarios } from '../services/Usuarios';
 import { Link } from 'react-router-dom';
 
@@ -74,7 +74,6 @@ function UsuariosListar() {
   if (loading) {
     return <p>Carregando...</p>;
   }
-
   return (
     <div>
       <h1>Lista de Usuários</h1>
