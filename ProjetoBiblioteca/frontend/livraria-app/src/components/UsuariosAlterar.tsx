@@ -8,7 +8,6 @@ function UsuarioAlterar(){
     const [nome, setNome] = useState('');
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
-    const [mensagem, setMensagem] = useState('');
 
 useEffect(() => {
     if (id) {
@@ -37,7 +36,7 @@ function alterarUsuario(e : any) {
     })
     .then((resposta) => resposta.json())
     .then((usuarios: Usuarios) => {
-        navigate("services/Usuarios");
+        navigate("/usuarios/listar");
         e.preventDefault();
     });
 }

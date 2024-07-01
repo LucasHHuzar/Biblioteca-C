@@ -199,15 +199,15 @@ app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) =>
 
 //Buscar Usuário
 //GET: http://localhost:5077/api/usuario/buscar/{nome}
-app.MapGet("/api/usuario/buscar/{nome}", ([FromRoute] string nome, [FromServices] AppDataContext ctx) =>
-{
-    Usuario? usuario = ctx.Usuarios.FirstOrDefault(x => x.Nome == nome);
-    if (usuario is null)
-    {
-        return Results.NotFound("Usuário não encontrado!");
-    }
-    return Results.Ok(usuario);
-});
+// app.MapGet("/api/usuario/buscar/{nome}", ([FromRoute] string nome, [FromServices] AppDataContext ctx) =>
+// {
+//     Usuario? usuario = ctx.Usuarios.FirstOrDefault(x => x.Nome == nome);
+//     if (usuario is null)
+//     {
+//         return Results.NotFound("Usuário não encontrado!");
+//     }
+//     return Results.Ok(usuario);
+// });
 
 //Buscar Usuário
 //GET: http://localhost:5077/api/usuario/buscar/{id}

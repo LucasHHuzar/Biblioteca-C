@@ -50,8 +50,8 @@ Content-Type: application/json
 ### Obtenção de todos os usuários
 GET {{base_url}}/usuario/listar
 
-### Busca de um usuário pelo nome
-GET {{base_url}}/usuario/buscar/Pedro
+### Busca de um usuário pelo id
+GET {{base_url}}/usuario/buscar/11699ee4-b148-4aef-b02e-7ddb1e74e4de
 
 ### Deleção de um usuário
 DELETE {{base_url}}/usuario/deletar/{id}

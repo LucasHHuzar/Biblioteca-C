@@ -51,25 +51,25 @@ function UsuariosListar() {
       });
   }
 
-  function alterar(id: string) {
-    fetch(`http://localhost:5077/api/usuario/alterar/${id}`, {
-      method: 'PUT',
-    })
-      .then((resposta) => {
-        if (!resposta.ok) {
-          throw new Error('Erro ao alterar usuário');
-        }
-        return resposta.json();
-      })
-      .then((dados) => {
-        console.log(dados);
-        carregarUsuarios();
-      })
-      .catch((error) => {
-        console.error('Erro ao alterar usuário:', error);
-        setError('Erro ao alterar usuário');
-      });
-  }
+  // function alterar(id: string) {
+  //   fetch(`http://localhost:5077/api/usuario/alterar/${id}`, {
+  //     method: 'PUT',
+  //   })
+  //     .then((resposta) => {
+  //       if (!resposta.ok) {
+  //         throw new Error('Erro ao alterar usuário');
+  //       }
+  //       return resposta.json();
+  //     })
+  //     .then((dados) => {
+  //       console.log(dados);
+  //       carregarUsuarios();
+  //     })
+  //     .catch((error) => {
+  //       console.error('Erro ao alterar usuário:', error);
+  //       setError('Erro ao alterar usuário');
+  //     });
+  // }
 
   if (loading) {
     return <p>Carregando...</p>;
