@@ -74,6 +74,7 @@ function UsuariosListar() {
   if (loading) {
     return <p>Carregando...</p>;
   }
+
   return (
     <div>
       <h1>Lista de Usuários</h1>
@@ -98,11 +99,6 @@ function UsuariosListar() {
               <td>{usuario.email}</td>
               <td><Link to={`/usuario/alterar/${usuario.id}`}>Alterar</Link></td>
               <td><button onClick={() =>{deletar(usuario.id!)}}>Deletar</button></td>
-              <td>
-                <button onClick={() => deletar(usuario.id!)}>
-                  Deletar
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
