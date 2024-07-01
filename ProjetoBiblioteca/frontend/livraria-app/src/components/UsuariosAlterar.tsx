@@ -22,6 +22,7 @@ useEffect(() => {
 }, []);
 
 function alterarUsuario(e : any) {
+    e.preventDefault();
     const usuarios = {
         nome: nome,
         telefone: telefone,
@@ -36,8 +37,7 @@ function alterarUsuario(e : any) {
     })
     .then((resposta) => resposta.json())
     .then((usuarios: Usuarios) => {
-        navigate("/usuarios/listar");
-        e.preventDefault();
+        navigate('/usuarios/listar');
     });
 }
 

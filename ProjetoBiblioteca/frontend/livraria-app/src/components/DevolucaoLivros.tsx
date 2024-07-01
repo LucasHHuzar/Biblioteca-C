@@ -1,38 +1,129 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { devolverLivro } from '../services/api'; // Importe a função devolverLivro do serviço api
+import React, { useEffect, useState } from 'react';
+import { addEmprestimo } from '../services/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function DevolucaoLivro() {
+interface Livro {
+  id: string;
+  titulo: string;
+  autor: string;
+  anoPublicacao: number;
+  exemplaresDisponiveis: number;
+}
+
+interface Emprestimo {
+  livroId: string;
+  usuarioId: string;
+}
+
+const EmprestimoLivros: React.FC = () => {
   const navigate = useNavigate();
-  const [livroId, setLivroId] = useState('');
-  const [error, setError] = useState('')
+  const { id } = useParams<{ id: string }>();
+  const [livro, setLivro] = useState<any>(); // Estado para armazenar os detalhes do livro
+  const [livroId, setLivroId] = useState<string>('');
+  const [usuarioId, setUsuarioId] = useState<string>('');
+  const [mensagem, setMensagem] = useState<string>('');
 
-  const livroDevolucao = () => {
-    devolverLivro(livroId)
+  useEffect(() => {
+    if (id) {
+      fetch(`http://localhost:5077/api/livros/buscar/${id}`)
+        .then((resposta) => resposta.json())
+        .then((livro) => {
+          console.log(livro);
+          setLivro(livro); // Atualiza o estado do livro com os detalhes buscados
+        })
+        .catch((error) => console.error('Erro ao buscar livro:', error));
+    }
+  }, [id]);
+
+  const emprestimoLivro = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!livro) {
+      console.error('Nenhum livro carregado.');
+      return;
+    }
+
+    const novoEmprestimo: Emprestimo = { livroId: livro.id, usuarioId };
+
+    addEmprestimo(novoEmprestimo)
       .then(() => {
-        console.log('Livro devolvido com sucesso.');
-        navigate('/livros/listar');
+        setLivro('');
+        setUsuarioId('');
+        setMensagem('Empréstimo realizado com sucesso!');
+        setTimeout(() => {
+          setLivro(null); // Limpa o estado do livro após emprestar
+          navigate('/emprestimo/listar');
+        }, 2000);
       })
-      .catch((error) => {
-        console.error('Erro ao devolver o livro:', error);
-        // Trate o erro conforme necessário
-      });
-  };
-
-  const handleChange = (event: any) => {
-    setLivroId(event.target.value);
+      .catch((error) => console.error('Erro ao adicionar empréstimo:', error));
   };
 
   return (
-    <div>
-      <h1>Devolver Livro</h1>
+    <form onSubmit={emprestimoLivro}>
+      <h1>Adicionar Empréstimo</h1>
       <label>
-        Id do Livro:
-        <input type="text" value={livroId} onChange={handleChange} />
+        Id Livro:
+        <input type="text" value={id} onChange={e => setLivroId(e.target.value)} />
       </label>
-      <button onClick={livroDevolucao}>Devolver</button>
-    </div>
+      {livro ? (
+        <>
+          <p>Detalhes do Livro:</p>
+          <p>Título: {livro.titulo}</p>
+          <p>Autor: {livro.autor}</p>
+          <p>Ano de Publicação: {livro.anoPublicacao}</p>
+          <p>Exemplares Disponíveis: {livro.exemplaresDisponiveis}</p>
+        </>
+      ) : (
+        <p>Carregando informações do livro...</p>
+      )}
+      <label>
+        Id Usuario:
+        <input type="text" value={usuarioId} onChange={e => setUsuarioId(e.target.value)} />
+      </label>
+      <button type="submit">Emprestar</button>
+      {mensagem && <p>{mensagem}</p>}
+    </form>
   );
-}
+};
 
-export default DevolucaoLivro;
+export default EmprestimoLivros;
+
+
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { devolverLivro } from '../services/api'; // Importe a função devolverLivro do serviço api
+
+// function DevolucaoLivro() {
+//   const navigate = useNavigate();
+//   const [livroId, setLivroId] = useState('');
+//   const [error, setError] = useState('')
+
+//   const livroDevolucao = () => {
+//     devolverLivro(livroId)
+//       .then(() => {
+//         console.log('Livro devolvido com sucesso.');
+//         navigate('/livros/listar');
+//       })
+//       .catch((error) => {
+//         console.error('Erro ao devolver o livro:', error);
+//         // Trate o erro conforme necessário
+//       });
+//   };
+
+//   const handleChange = (event: any) => {
+//     setLivroId(event.target.value);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Devolver Livro</h1>
+//       <label>
+//         Id do Livro:
+//         <input type="text" value={livroId} onChange={handleChange} />
+//       </label>
+//       <button onClick={livroDevolucao}>Devolver</button>
+//     </div>
+//   );
+// }
+
+// export default DevolucaoLivro;
