@@ -49,7 +49,7 @@ function deletar(id: string) {
               <td>{usuario.nome}</td>
               <td>{usuario.telefone}</td>
               <td>{usuario.email}</td>
-              <td><Link to={`/UsuariosListar/${usuario.id}`}></Link></td>
+              <td><Link to={`/usuario/alterar/${usuario.id}`}>Alterar</Link></td>
               <td><button onClick={() =>{deletar(usuario.id!)}}>Deletar</button></td>
             </tr>
           ))}

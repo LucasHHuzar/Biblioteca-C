@@ -52,7 +52,7 @@ const EmprestimoLivros: React.FC = () => {
         setMensagem('Empréstimo realizado com sucesso!');
         setTimeout(() => {
           setLivro(null); // Limpa o estado do livro após emprestar
-          navigate('/emprestimo/listar'); // Navega para o caminho correto
+          navigate('/emprestimo/listar');
         }, 2000);
       })
       .catch((error) => console.error('Erro ao adicionar empréstimo:', error));

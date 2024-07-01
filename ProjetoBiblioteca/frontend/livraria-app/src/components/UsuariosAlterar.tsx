@@ -41,6 +41,7 @@ function alterarUsuario(e : any) {
         e.preventDefault();
     });
 }
+
 return (
         <form onSubmit={alterarUsuario}>
             <h1>Alterar Usuário</h1>

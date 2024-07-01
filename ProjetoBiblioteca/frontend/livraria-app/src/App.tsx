@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import DevolucaoLivro from './components/DevolucaoLivros';
 import EmprestimosListar from './components/EmprestimosListar';
 import UsuariosListar from './components/UsuariosListar';
+import UsuarioAlterar from './components/UsuariosAlterar';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/emprestimo/listar" element={<EmprestimosListar />} />
           <Route path="/emprestimo/cadastrar/:id" element={<EmprestimoLivros />} /> 
           <Route path="/devolucao/listar" element={<DevolucaoLivro />} /> 
+          <Route path="/usuario/alterar/:id" element={<UsuarioAlterar />} /> 
 
         </Routes>
       </BrowserRouter>

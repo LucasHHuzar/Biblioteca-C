@@ -19,6 +19,7 @@ function AddUsuario() {
         setTelefone('');
         setEmail('');
         setMensagem('Usuário cadastrado com Sucesso!')
+        navigate('/usuarios/listar');
       })
       .catch((error) =>{
         console.error('Erro ao adicionar usuário:', error);
